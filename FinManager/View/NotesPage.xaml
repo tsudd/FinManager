@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="FinManager.View.NotesPage" Title="Notes">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label x:Name="bal" TextColor="Blue"
+                       FontSize="Large"
+                       VerticalTextAlignment="Start"
+                       HorizontalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Balance: " />
+                        <Span Text="{Binding Balance}" TextColor="Green"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <ListView x:Name="notesList" ItemsSource="{Binding NoteGroups}" 
+                          SelectedItem="{Binding SelectedNote, Mode=TwoWay}" HasUnevenRows="True"
+                          IsGroupingEnabled="True" >
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="25">
+                            <Label Text="{Binding Name}" FontSize="Caption" TextColor="Black" />
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="20">
+                            <StackLayout Orientation="Horizontal" >
+                                <Label HorizontalOptions="StartAndExpand" 
+                                            VerticalTextAlignment="Center"
+                                            TextColor="Black">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Category}"/>
+                                            <Span Text=" - " />
+                                            <Span Text="{Binding Sum}" TextColor="Red"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+            <Button Text="+" TextColor="Black" 
+                    Command="{Binding CreateNoteCommand}" 
+                    HorizontalOptions="End" VerticalOptions="End" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+            </Grid>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

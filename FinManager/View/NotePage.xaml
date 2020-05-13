@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="FinManager.View.NotePage" Title="Creating a note">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <Label x:Name ="lbl" Text="Amount of an expense" FontSize="Medium" />
+                <Entry Text="{Binding Sum}" FontSize="Medium" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="End">
+                <Button Text="Back" Command="{Binding Path=ListViewModel.BackCommand}" />
+                <Button Text="Done" Command="{Binding ListViewModel.SaveNoteCommand}" 
+                        CommandParameter="{Binding}" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
