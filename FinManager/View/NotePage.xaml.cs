@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FinManager.ViewModel;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,6 +19,11 @@ namespace FinManager.View
             InitializeComponent();
             ViewModel = vm;
             this.BindingContext = ViewModel;
-        } 
+        }
+
+        private void DatePicker(object sender, DateChangedEventArgs e)
+        {
+            ViewModel.DateTime = e.NewDate;
+        }
     }
 }

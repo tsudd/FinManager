@@ -22,8 +22,7 @@ namespace FinManager.Data
 
         public List<Category> GetCategories()
         {
-            var list = database.Table<Category>().ToList();
-            return list;
+            return database.Table<Category>().ToList();
         }
 
         public Category GetCategory(int id)

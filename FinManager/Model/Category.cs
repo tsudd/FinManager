@@ -20,16 +20,15 @@ namespace FinManager.Model
 
         public string Color { get; set; }
         public string Name { get; set; }
-        public bool InCome { get; set; }
+        public byte InCome { get; set; }
 
         public Category()
         {
-            InCome = false;
             Color = "#FF0000";
             Name = "SOMETHING";
         }
 
-        public Category(string nm, string clr, bool inCom = false)
+        public Category(string nm, string clr, byte inCom = 0)
         {
             Color = clr;
             Name = nm.Trim().ToUpper();

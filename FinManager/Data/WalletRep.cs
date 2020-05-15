@@ -25,8 +25,7 @@ namespace FinManager.Data
 
         public List<Wallet> GetWallets()
         {
-            var list = database.Table<Wallet>().ToList();
-            return list;
+            return database.Table<Wallet>().ToList();
         }
 
         public Wallet GetWallet(int id)
@@ -34,6 +33,21 @@ namespace FinManager.Data
             var it = database.Get<Wallet>(id);
             return it;
 
+        }
+
+        public async void ChangeSum(Note note, bool add = true)
+        {
+            var wal = GetWallet(note.WalId);
+            var cat = App.Categories.GetCategory(note.CatId);
+            if (note.ID != 0)
+            {
+                var oldNote = await App.Notes.GetNoteAsync(note.ID);
+                wal.Sum += Math.Pow(-1, (double)cat.InCome) * oldNote.Sum;
+            }
+            if (add)
+                wal.Sum += (-1)*Math.Pow(-1, (double)cat.InCome) * note.Sum;
+            SaveWallet(wal);
+            BalanceSync();
         }
 
         public int DeleteWallet(int id)
@@ -57,6 +71,7 @@ namespace FinManager.Data
         public void BalanceSync()
         {
             var table = new ObservableCollection<Wallet>(GetWallets());
+            balance = 0;
             foreach (var i in table)
             {
                 balance += i.Sum;

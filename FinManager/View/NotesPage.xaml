@@ -20,21 +20,32 @@
             </Label>
             <ListView x:Name="notesList" ItemsSource="{Binding NoteGroups}" 
                           SelectedItem="{Binding SelectedNote, Mode=TwoWay}" HasUnevenRows="True"
-                          IsGroupingEnabled="True" >
+                          IsGroupingEnabled="True"
+                          CachingStrategy="RecycleElement"
+                      IsPullToRefreshEnabled="True"
+                      Refreshing="OnRefresh"
+                      >
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell Height="25">
-                            <Label Text="{Binding Name}" FontSize="Caption" TextColor="Black" />
+                            <Label Text="{Binding Name}" FontSize="Caption" TextColor="Black" Padding="4"/>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.GroupHeaderTemplate>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell Height="20">
+                        <ViewCell Height="40">
+                            <ViewCell.ContextActions>
+                                <MenuItem Clicked="OnDelete"
+                                          CommandParameter="{Binding .}"
+                                          IsDestructive="True"
+                                          Text="Delete" />
+                            </ViewCell.ContextActions>
                             <StackLayout Orientation="Horizontal" >
                                 <Label HorizontalOptions="StartAndExpand" 
                                             VerticalTextAlignment="Center"
-                                            TextColor="Black">
+                                            TextColor="Black"
+                                       Padding="5">
                                     <Label.FormattedText>
                                         <FormattedString>
                                             <Span Text="{Binding Category}"/>
@@ -49,18 +60,22 @@
                 </ListView.ItemTemplate>
 
             </ListView>
-            <Button Text="+" TextColor="Black" 
-                    Command="{Binding CreateNoteCommand}" 
-                    HorizontalOptions="End" VerticalOptions="End" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
+                <Button Text="-"
+                        TextColor="Black"
+                        Grid.Column="0"
+                        Grid.Row="0"/>
+                <Button Text="+" TextColor="Black" 
+                        Command="{Binding CreateNoteCommand}" 
+                        Grid.Column="1"
+                        Grid.Row="0"/>
             </Grid>
         </StackLayout>
 

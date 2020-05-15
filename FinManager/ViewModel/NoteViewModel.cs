@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Xml.Schema;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace FinManager.ViewModel
 {
@@ -12,6 +13,9 @@ namespace FinManager.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         NoteListViewModel lvm;
+        Wallet wallet;
+        Category category;
+        DateTime chosenDate;
 
         public Note Expense { get; set; }
 
@@ -19,8 +23,8 @@ namespace FinManager.ViewModel
         {
             Expense = new Note
             {
-                ID = 0,
                 CatId = 1,
+                WalId = 1,
                 Date = DateTime.Today,
                 Cat = App.Categories.GetCategory(1).Name
             };
@@ -34,10 +38,51 @@ namespace FinManager.ViewModel
                 ID = note.ID,
                 CatId = note.CatId,
                 Sum = note.Sum,
+                WalId = note.WalId,
                 Date = note.Date,
             };
 
-            Expense.Cat = App.Categories.GetCategory(note.CatId).Name;
+            Expense.Cat = Note.GetCategory(Expense.CatId);
+        }
+
+        public Wallet SelectedWallet
+        {
+            get { return wallet; }
+            set
+            {
+                if (wallet != value)
+                {
+                    wallet = value;
+                    Expense.WalId = wallet.ID;
+                    OnPropertyChanged("SelectedWallet");
+                }
+            }
+        }
+
+        public Category SelectedCategory
+        {
+            get { return category; }
+            set
+            {
+                if (category != value)
+                {
+                    category = value;
+                    Expense.CatId = category.ID;
+                    Expense.Cat = Note.GetCategory(category.ID);
+                    OnPropertyChanged("SelectedCategory");
+                }
+            }
+        }
+
+        public DateTime DateTime
+        {
+            get { return chosenDate; }
+            set
+            {
+                chosenDate = value;
+                Expense.Date = chosenDate;
+                OnPropertyChanged("DateTime");
+            }
         }
 
         public NoteListViewModel ListViewModel
@@ -87,6 +132,11 @@ namespace FinManager.ViewModel
         {
             get { return Expense.Date.ToString("d"); }
             set {; }
+        }
+
+        public string WalName
+        {
+            get { return wallet.WalName; }
         }
     }
 }

@@ -16,13 +16,14 @@ namespace FinManager.ViewModel
     {
         public ObservableCollection<NoteViewModel> List { get; set; }
         public ObservableCollection<Grouping<string, NoteViewModel>> NoteGroups { get; set; }
+        public List<Wallet> Wallets { get; set; }
+        public List<Category> Categories { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public INavigation Navigation { get; set; }
 
         public ICommand CreateNoteCommand { protected set; get; }
-        public ICommand DeleteNoteCommand { protected set; get; }
         public ICommand SaveNoteCommand { protected set; get; }
         public ICommand BackCommand { protected set; get; }
         private NoteViewModel selectedNote;
@@ -33,13 +34,16 @@ namespace FinManager.ViewModel
             GetItems();
             App.Wallets.BalanceSync();
             CreateNoteCommand = new Command(CreateNote);
-            DeleteNoteCommand = new Command(DeleteNote);
             SaveNoteCommand = new Command(SaveNote);
             BackCommand = new Command(Back);
         }
 
         public void MakeGrouping()
         {
+            if (List == null)
+            {
+                return;
+            }    
             var group = List.GroupBy(p => p.Date)
                 .Select(g => new Grouping<string, NoteViewModel>(g.Key, g));
             NoteGroups = new ObservableCollection<Grouping<string, NoteViewModel>>(group);
@@ -88,19 +92,20 @@ namespace FinManager.ViewModel
                     List.Add(note);
                 }
                 App.Notes.SaveNote(note.Expense);
+                OnPropertyChanged("Balance");
             }
             Back();
         }
 
-        private void DeleteNote(object noteObj)
+        public void DeleteNote(NoteViewModel note)
         {
-            NoteViewModel note = noteObj as NoteViewModel;
             if (note != null)
             {
                 List.Remove(note);
                 App.Notes.DeleteNote(note.Expense);
+                MakeGrouping();
+                OnPropertyChanged("Balance");
             }
-            Back();
         }
 
         public string Balance

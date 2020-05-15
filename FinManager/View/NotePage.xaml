@@ -7,6 +7,82 @@
              x:Class="FinManager.View.NotePage" Title="Creating a note">
     <ContentPage.Content>
         <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Date - " 
+                       TextColor="Black" 
+                       FontSize="Medium"
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center"
+                       Grid.Column="0"
+                       Grid.Row="0"/>
+                <DatePicker Format="D" 
+                            DateSelected="DatePicker" 
+                            Grid.Column="1" Grid.Row="0" 
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            MaximumDate="{Binding Expense.Date}">
+                    <DatePicker.MinimumDate>1/01/2020</DatePicker.MinimumDate>
+                </DatePicker>
+            </Grid>
+            <Label Text="Choose a wallet" TextColor="Black" FontSize="Medium" />
+            <RelativeLayout HeightRequest="90">
+                <ListView CachingStrategy="RecycleElement"
+                              x:Name="wlts"
+                              ItemsSource="{Binding ListViewModel.Wallets}"
+                              RowHeight="90"
+                              Rotation="270"
+                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-45}"
+                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=-0.5, Constant=45}"
+                              RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                              RelativeLayout.WidthConstraint="{ConstraintExpression Type=Constant, Constant=90}"
+                              SelectedItem="{Binding SelectedWallet}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ContentView Rotation="90">
+                                    <Label Text="{Binding WalName}" 
+                                               HorizontalOptions="Center" 
+                                               VerticalOptions="Center" 
+                                               FontSize="Medium" 
+                                               TextColor="Black"/>
+                                </ContentView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </RelativeLayout>
+            <Label Text="Choose a category" TextColor="Black" FontSize="Medium" />
+            <RelativeLayout>
+                <ListView CachingStrategy="RecycleElement"
+                              SelectedItem="{Binding SelectedCategory}"
+                              ItemsSource="{Binding ListViewModel.Categories}"
+                              RowHeight="90"
+                              Rotation="270"
+                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-45}"
+                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=-0.5, Constant=45}"
+                              RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                              RelativeLayout.WidthConstraint="{ConstraintExpression Type=Constant, Constant=90}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ContentView Rotation="90" BackgroundColor="{Binding Color}">
+                                    <Label Text="{Binding Name}"
+                                                TextColor="White"
+                                                HorizontalOptions="CenterAndExpand"
+                                                VerticalOptions="CenterAndExpand"/>
+                                </ContentView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </RelativeLayout>
             <StackLayout>
                 <Label x:Name ="lbl" Text="Amount of an expense" FontSize="Medium" />
                 <Entry Text="{Binding Sum}" FontSize="Medium" />

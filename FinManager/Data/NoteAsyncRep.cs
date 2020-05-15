@@ -35,11 +35,13 @@ namespace FinManager.Data
 
         public Task<int> DeleteNote(Note item)
         {
+            App.Wallets.ChangeSum(item, false);
             return database.DeleteAsync(item);
         }
 
         public Task<int> SaveNote(Note note)
         {
+            App.Wallets.ChangeSum(note);
             if (note.ID != 0)
             {
                 return database.UpdateAsync(note);
