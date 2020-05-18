@@ -14,11 +14,12 @@ namespace FinManager.View
     public partial class NotePage : ContentPage
     {
         public NoteViewModel ViewModel { get; private set; }
-        public NotePage(NoteViewModel vm)
+        public NotePage(NoteViewModel noteViewModel)
         {
-            InitializeComponent();
-            ViewModel = vm;
+            ViewModel = noteViewModel;
             this.BindingContext = ViewModel;
+            InitializeComponent();
+            
         }
 
         private void DatePicker(object sender, DateChangedEventArgs e)

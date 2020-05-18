@@ -35,14 +35,13 @@ namespace FinManager.Data
 
         }
 
-        public async void ChangeSum(Note note, bool add = true)
+        public void ChangeSum(Note note, bool add = true)
         {
             var wal = GetWallet(note.WalId);
             var cat = App.Categories.GetCategory(note.CatId);
             if (note.ID != 0)
             {
-                var oldNote = await App.Notes.GetNoteAsync(note.ID);
-                wal.Sum += Math.Pow(-1, (double)cat.InCome) * oldNote.Sum;
+                wal.Sum += Math.Pow(-1, (double)cat.InCome) * note.Sum;
             }
             if (add)
                 wal.Sum += (-1)*Math.Pow(-1, (double)cat.InCome) * note.Sum;
@@ -76,7 +75,7 @@ namespace FinManager.Data
             {
                 balance += i.Sum;
             }
-            OnPropertyChanged("Balance");
+            //OnPropertyChanged("Balance");
 
         }
 

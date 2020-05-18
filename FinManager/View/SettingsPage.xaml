@@ -7,9 +7,20 @@
              x:Class="FinManager.View.SettingsPage" Title="Settings">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <!--<TableView>
+                <TableView.Root>
+                    <TableRoot>
+                        <TableSection Title="Data">
+                            <
+                            <Button Text="Manage wallets" />
+                            <Button Text="Manage categoried" />
+                        </TableSection>
+                        <TableSection Title="Themes">
+                            
+                        </TableSection>
+                    </TableRoot>
+                </TableView.Root>
+            </TableView>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

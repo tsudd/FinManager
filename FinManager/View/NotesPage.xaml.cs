@@ -40,7 +40,6 @@ namespace FinManager.View
         {
             NoteViewModel note = ((MenuItem)sender).CommandParameter as NoteViewModel;
             noteList.DeleteNote(note);
-            App.Wallets.BalanceSync();
         }
 
     }

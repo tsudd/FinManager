@@ -28,7 +28,7 @@ namespace FinManager.ViewModel
                 Date = DateTime.Today,
                 Cat = App.Categories.GetCategory(1).Name
             };
-
+            chosenDate = DateTime.Today;
         }
 
         public NoteViewModel(Note note)
@@ -41,7 +41,7 @@ namespace FinManager.ViewModel
                 WalId = note.WalId,
                 Date = note.Date,
             };
-
+            chosenDate = note.Date;
             Expense.Cat = Note.GetCategory(Expense.CatId);
         }
 
@@ -50,7 +50,7 @@ namespace FinManager.ViewModel
             get { return wallet; }
             set
             {
-                if (wallet != value)
+                if (value != null && wallet != value)
                 {
                     wallet = value;
                     Expense.WalId = wallet.ID;
@@ -64,7 +64,7 @@ namespace FinManager.ViewModel
             get { return category; }
             set
             {
-                if (category != value)
+                if (value != null && category != value)
                 {
                     category = value;
                     Expense.CatId = category.ID;
@@ -79,9 +79,12 @@ namespace FinManager.ViewModel
             get { return chosenDate; }
             set
             {
-                chosenDate = value;
-                Expense.Date = chosenDate;
-                OnPropertyChanged("DateTime");
+                if (value != null)
+                {
+                    chosenDate = value;
+                    Expense.Date = chosenDate;
+                    OnPropertyChanged("DateTime");
+                }
             }
         }
 
@@ -111,9 +114,10 @@ namespace FinManager.ViewModel
             get { return Expense.Sum.ToString(); }
             set
             {
-                if (Double.TryParse(value.Replace(',', '.'), out double ans))
+                if (Double.TryParse(value, out double ans))
                 {
                     Expense.Sum = ans;
+                    OnPropertyChanged("Sum");
                 }
             }
         }
@@ -132,11 +136,6 @@ namespace FinManager.ViewModel
         {
             get { return Expense.Date.ToString("d"); }
             set {; }
-        }
-
-        public string WalName
-        {
-            get { return wallet.WalName; }
         }
     }
 }

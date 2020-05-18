@@ -60,23 +60,12 @@
                 </ListView.ItemTemplate>
 
             </ListView>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40" />
-                </Grid.RowDefinitions>
-                <Button Text="-"
-                        TextColor="Black"
-                        Grid.Column="0"
-                        Grid.Row="0"/>
+            <StackLayout>
                 <Button Text="+" TextColor="Black" 
-                        Command="{Binding CreateNoteCommand}" 
-                        Grid.Column="1"
-                        Grid.Row="0"/>
-            </Grid>
+                            Command="{Binding CreateNoteCommand}" 
+                            HorizontalOptions="End"
+                        VerticalOptions="End"/>
+            </StackLayout>
         </StackLayout>
 
     </ContentPage.Content>

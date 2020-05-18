@@ -27,7 +27,7 @@
                             Grid.Column="1" Grid.Row="0" 
                             HorizontalOptions="Center"
                             VerticalOptions="Center"
-                            MaximumDate="{Binding Expense.Date}">
+                            MaximumDate="{Binding DateTime}">
                     <DatePicker.MinimumDate>1/01/2020</DatePicker.MinimumDate>
                 </DatePicker>
             </Grid>
