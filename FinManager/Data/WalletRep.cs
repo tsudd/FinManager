@@ -41,10 +41,10 @@ namespace FinManager.Data
             var cat = App.Categories.GetCategory(note.CatId);
             if (note.ID != 0)
             {
-                wal.Sum += Math.Pow(-1, (double)cat.InCome) * note.Sum;
+                wal.Sum += Math.Pow(-1, cat.InCome?1.0:0) * note.Sum;
             }
             if (add)
-                wal.Sum += (-1)*Math.Pow(-1, (double)cat.InCome) * note.Sum;
+                wal.Sum += (-1)*Math.Pow(-1, cat.InCome?1.0:0) * note.Sum;
             SaveWallet(wal);
             BalanceSync();
         }

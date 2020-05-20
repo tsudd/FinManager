@@ -5,6 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="FinManager.View.SettingsPage" Title="Settings">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="plainButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#eee"/>
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="BorderRadius" Value="0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
             <!--<TableView>
@@ -21,6 +30,39 @@
                     </TableRoot>
                 </TableView.Root>
             </TableView>-->
+            <Grid RowSpacing="0" VerticalOptions="CenterAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="100" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Text="Manage categories" 
+                        FontSize="Medium" 
+                        Grid.Row="2" 
+                        Grid.Column="0" 
+                        Style="{StaticResource plainButton}"
+                        Command="{Binding ManageCategoriesCommand}"/>
+                <Button Text="Manage wallets" 
+                        FontSize="Medium" 
+                        Grid.Row="3" 
+                        Grid.Column="0" 
+                        Style="{StaticResource plainButton}"
+                        Command="{Binding ManageWalletsCommand}"/>
+                <Button Text="Language" 
+                        FontSize="Medium" 
+                        Grid.Row="1" 
+                        Grid.Column="0" 
+                        Style="{StaticResource plainButton}"/>
+                <Button Text="Theme" 
+                        FontSize="Medium" 
+                        Grid.Row="0" 
+                        Grid.Column="0" 
+                        Style="{StaticResource plainButton}"/>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

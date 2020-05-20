@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using FinManager.Model;
 using FinManager.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -18,8 +19,6 @@ namespace FinManager.View
         {
             InitializeComponent();
             noteList = new NoteListViewModel() { Navigation = this.Navigation };
-            noteList.Wallets = App.Wallets.GetWallets();
-            noteList.Categories = App.Categories.GetCategories();
             BindingContext = noteList;
         }
 
@@ -33,6 +32,7 @@ namespace FinManager.View
         {
             var list = (ListView)sender;
             noteList.MakeGrouping();
+            noteList.SyncInfo();
             list.IsRefreshing = false;
         }
 

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="FinManager.View.WalletsPage" Title="Wallets list">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="notesList" ItemsSource="{Binding Wallets}" 
+                      HasUnevenRows="True"
+                      CachingStrategy="RecycleElement"
+                      SelectedItem="{Binding SelectedWallet, Mode=TwoWay}"
+                      >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Height="40"
+                                  Text="{Binding WalName}"
+                                  TextColor="Black"
+                                  />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout>
+                <Button Text="+" TextColor="Black" 
+                            Command="{Binding AddWalletCommand}" 
+                            HorizontalOptions="End"
+                        VerticalOptions="End"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

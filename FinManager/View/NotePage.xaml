@@ -72,11 +72,18 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <ContentView Rotation="90" BackgroundColor="{Binding Color}">
-                                    <Label Text="{Binding Name}"
-                                                TextColor="White"
-                                                HorizontalOptions="CenterAndExpand"
-                                                VerticalOptions="CenterAndExpand"/>
+                                <ContentView Rotation="90">
+                                    <StackLayout>
+                                        <AbsoluteLayout>
+                                            <BoxView Color="{Binding Color}" AbsoluteLayout.LayoutBounds="1, 1, 30, 30" 
+                                                     AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                                        </AbsoluteLayout>
+                                        <Label Text="{Binding Name}"
+                                                    TextColor="Black"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    VerticalOptions="CenterAndExpand"
+                                        />
+                                    </StackLayout>
                                 </ContentView>
                             </ViewCell>
                         </DataTemplate>
@@ -85,7 +92,7 @@
             </RelativeLayout>
             <StackLayout>
                 <Label x:Name ="lbl" Text="Amount of an expense" FontSize="Medium" />
-                <Entry Text="{Binding Sum}" FontSize="Medium" />
+                <Entry Text="{Binding Sum}" FontSize="Medium" Keyboard="Numeric"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="End">
                 <Button Text="Back" Command="{Binding Path=ListViewModel.BackCommand}" />

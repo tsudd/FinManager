@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="FinManager.View.CategoriesPage" Title="Manage Categories">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="notesList" ItemsSource="{Binding Categories}" 
+                      HasUnevenRows="True"
+                      CachingStrategy="RecycleElement"
+                      SelectedItem="{Binding SelectedCateg, Mode=TwoWay}"
+                      >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="40">
+                            <ViewCell.ContextActions>
+                                <MenuItem Clicked="OnDelete"
+                                          CommandParameter="{Binding .}"
+                                          IsDestructive="True"
+                                          Text="Delete" />
+                            </ViewCell.ContextActions>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding Name}"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="CenterAndExpand"
+                                       FontSize="Default"
+                                       TextColor="Black"
+                                       Grid.Column="0"
+                                       Grid.Row="0" />
+                                <BoxView BackgroundColor="{Binding Color}"
+                                         Grid.Column="1"
+                                         Grid.Row="0" />
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout>
+                <Button Text="+" TextColor="Black" 
+                            Command="{Binding AddCategoryCommand}" 
+                            HorizontalOptions="End"
+                        VerticalOptions="End"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -135,7 +135,6 @@ namespace FinManager.ViewModel
         public string Date
         {
             get { return Expense.Date.ToString("d"); }
-            set {; }
         }
     }
 }

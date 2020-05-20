@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="FinManager.View.CategoryPage" Title="Creating a category">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Enter a name" TextColor="Black" FontSize="Medium" HorizontalTextAlignment="Start" Padding="5" />
+            <Entry Text="{Binding Name}" FontSize="Medium" Keyboard="Default" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="50" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Expense/income" TextColor="Black" 
+                       FontSize="Default" 
+                       VerticalOptions="CenterAndExpand"
+                       Grid.Row="0"
+                       Grid.Column="0" />
+                <Switch IsToggled="False" Toggled="Switchh" 
+                        Grid.Column="1"
+                        Grid.Row="0"/>
+            </Grid>
+            <Label Text="Choose a color" TextColor="Black" FontSize="Medium"/>
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45" />
+                    <RowDefinition Height="45"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button BackgroundColor="#808080"
+                        BorderWidth="1"
+                        Clicked="ChooseColor"
+                        Grid.Column="0"
+                        Grid.Row="0" />
+                <Button BackgroundColor="#800080"
+                        BorderWidth="1"
+                        Clicked="ChooseColor"
+                        Grid.Column="1"
+                        Grid.Row="0"/>
+                <Button BackgroundColor="#000080"
+                        BorderWidth="1"
+                        Clicked="ChooseColor"
+                        Grid.Column="2"
+                        Grid.Row="0"/>
+                <Button BackgroundColor="#4682B4"
+                        BorderWidth="1"
+                        Clicked="ChooseColor"
+                        Grid.Column="3"
+                        Grid.Row="0"/>
+                <Button BackgroundColor="#DC143C"
+                        BorderWidth="1"
+                        Clicked="ChooseColor"
+                        Grid.Column="0"
+                        Grid.Row="1"/>
+                <Button BackgroundColor="#FFA500"
+                        BorderWidth="0"
+                        Clicked="ChooseColor"
+                        Grid.Column="1"
+                        Grid.Row="1"/>
+                <Button BackgroundColor="#800000"
+                        BorderWidth="1"
+                        Clicked="ChooseColor"
+                        Grid.Column="2"
+                        Grid.Row="1"/>
+                <Button BackgroundColor="#FFD700"
+                        BorderWidth="1"
+                        Clicked="ChooseColor"
+                        Grid.Column="3"
+                        Grid.Row="1"/>
+
+            </Grid>
+            <!--<RelativeLayout>
+                <ListView CachingStrategy="RecycleElement"
+                              SelectedItem="{Binding SelectedColor}"
+                              ItemsSource="{Binding LstViewModel.Colors}"
+                              RowHeight="90"
+                              Rotation="270"
+                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-45}"
+                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=-0.5, Constant=45}"
+                              RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                              RelativeLayout.WidthConstraint="{ConstraintExpression Type=Constant, Constant=90}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ContentView Rotation="90" BackgroundColor="{Binding Color}">
+                                    <Label Text="{Binding Name}"
+                                                TextColor="White"
+                                                HorizontalOptions="CenterAndExpand"
+                                                VerticalOptions="CenterAndExpand"/>
+                                </ContentView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </RelativeLayout>-->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="End">
+                <Button Text="Back" Command="{Binding Path=LstViewModel.BackCommand}" />
+                <Button Text="Done" Command="{Binding LstViewModel.SaveCategoryCommand}" 
+                        CommandParameter="{Binding}" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

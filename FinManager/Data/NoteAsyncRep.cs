@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 
 namespace FinManager.Data
 {
-    public class NoteAsyncRep: INotifyPropertyChanged
+    public class NoteAsyncRep
     {
         readonly SQLiteAsyncConnection database;
-
-        public event PropertyChangedEventHandler PropertyChanged;
         public NoteAsyncRep(string dBPath)
         {
             database = new SQLiteAsyncConnection(dBPath);
@@ -49,6 +47,19 @@ namespace FinManager.Data
             else
             {
                 return database.InsertAsync(note);
+            }
+        }
+
+        public async void AdjustNotes(int id)
+        {
+            var notes = await database.Table<Note>().ToListAsync();
+            foreach(var i in notes)
+            {
+                if (i.CatId == id)
+                {
+                    i.CatId = 1;
+                    await SaveNote(i);
+                }    
             }
         }
     }

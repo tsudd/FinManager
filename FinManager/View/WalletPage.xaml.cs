@@ -11,14 +11,16 @@ using Xamarin.Forms.Xaml;
 namespace FinManager.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SettingsPage : ContentPage
+    public partial class WalletPage : ContentPage
     {
-        SettingsViewModel settings;
-        public SettingsPage()
+        public WalletViewModel WalletView { get; private set; }
+        public WalletPage(WalletViewModel wvm)
         {
+            WalletView = wvm;
+            this.BindingContext = WalletView;
             InitializeComponent();
-            settings = new SettingsViewModel() { Navigation = this.Navigation };
-            BindingContext = settings;
         }
+
+
     }
 }

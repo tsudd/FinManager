@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -19,6 +20,7 @@ namespace FinManager.ViewModel
         public List<Wallet> Wallets { get; set; }
         public List<Category> Categories { get; set; }
 
+        public delegate void UpdateLists();
         public event PropertyChangedEventHandler PropertyChanged;
 
         public INavigation Navigation { get; set; }
@@ -31,7 +33,7 @@ namespace FinManager.ViewModel
         public NoteListViewModel()
         {
             List = new ObservableCollection<NoteViewModel>();
-            GetItems();
+            SyncInfo();
             App.Wallets.BalanceSync();
             CreateNoteCommand = new Command(CreateNote);
             SaveNoteCommand = new Command(SaveNote);
@@ -40,7 +42,7 @@ namespace FinManager.ViewModel
 
         public void MakeGrouping()
         {
-            if (List == null)
+            if (List.Count == 0)
             {
                 return;
             }    
@@ -85,8 +87,12 @@ namespace FinManager.ViewModel
         private void SaveNote(object noteObj)
         {
             NoteViewModel note = noteObj as NoteViewModel;
-            if (note != null && note.IsValid)
+            if (note != null)
             {
+                if (note.Expense.Sum <= 0)
+                {
+
+                }
                 if (note.Expense.ID == 0)
                 {
                     List.Add(note);
@@ -115,6 +121,21 @@ namespace FinManager.ViewModel
 
         private async void GetItems()
         {
+            List?.Clear();
+            var table = new ObservableCollection<Note>(await App.Notes.GetNotesAsync());
+            foreach (var i in table)
+            {
+                List.Add(new NoteViewModel(i));
+            }
+        }
+
+        public async void SyncInfo()
+        {
+            Wallets?.Clear();
+            Categories?.Clear();
+            List?.Clear();
+            Wallets = App.Wallets.GetWallets();
+            Categories = App.Categories.GetCategories();
             var table = new ObservableCollection<Note>(await App.Notes.GetNotesAsync());
             foreach (var i in table)
             {
