@@ -20,6 +20,7 @@ namespace FinManager.View
             InitializeComponent();
             noteList = new NoteListViewModel() { Navigation = this.Navigation };
             BindingContext = noteList;
+            noteList.UserNotify += Notification;
         }
 
         protected override void OnAppearing()
@@ -40,6 +41,11 @@ namespace FinManager.View
         {
             NoteViewModel note = ((MenuItem)sender).CommandParameter as NoteViewModel;
             noteList.DeleteNote(note);
+        }
+
+        private async void Notification(string msg)
+        {
+            await DisplayAlert("Message", msg, "OK");
         }
 
     }

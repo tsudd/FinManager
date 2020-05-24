@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using Xamarin.Forms;
 
 namespace FinManager.ViewModel
 {
@@ -60,7 +61,7 @@ namespace FinManager.ViewModel
             set
             {
                 
-                Wallet.WalName = value;
+                Wallet.WalName = value.Trim();
                 OnPropertyChanged("Name");
             }
         }

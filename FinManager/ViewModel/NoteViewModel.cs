@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml.Schema;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -11,6 +12,10 @@ namespace FinManager.ViewModel
 {
     public class NoteViewModel : INotifyPropertyChanged
     {
+        private const string pattern1 = @"^\d*";
+        private const string pattern2 = @"^\d*\G[.,]\d*";
+        private const string pattern3 = @"^\d*\G[.,]";
+        private string sum;
         public event PropertyChangedEventHandler PropertyChanged;
         NoteListViewModel lvm;
         Wallet wallet;
@@ -112,11 +117,17 @@ namespace FinManager.ViewModel
         public string Sum
         {
             get { return Expense.Sum.ToString(); }
+
+        }
+
+        public string Amount
+        {
+            get { return sum; }
             set
             {
-                if (Double.TryParse(value, out double ans))
+                if (Regex.IsMatch(value, pattern1) || Regex.IsMatch(value, pattern2) || Regex.IsMatch(value, pattern3))
                 {
-                    Expense.Sum = ans;
+                    sum = value;
                     OnPropertyChanged("Sum");
                 }
             }

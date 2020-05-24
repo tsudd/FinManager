@@ -92,7 +92,7 @@
             </RelativeLayout>
             <StackLayout>
                 <Label x:Name ="lbl" Text="Amount of an expense" FontSize="Medium" />
-                <Entry Text="{Binding Sum}" FontSize="Medium" Keyboard="Numeric"/>
+                <Entry Text="{Binding Amount}" FontSize="Medium" Keyboard="Numeric"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="End">
                 <Button Text="Back" Command="{Binding Path=ListViewModel.BackCommand}" />

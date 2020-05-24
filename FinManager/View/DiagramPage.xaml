@@ -2,14 +2,54 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              mc:Ignorable="d"
-             x:Class="FinManager.View.DiagramPage" Title="Info">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+             x:Class="FinManager.View.DiagramPage" Title="Charts">
+    <StackLayout>
+        <Picker FontSize="Medium" ItemsSource="{Binding Mounths}"
+                             x:Name="picker" SelectedIndexChanged="SelectedMounth"
+                HorizontalOptions="CenterAndExpand"
+                WidthRequest="150"
+                />
+        <RefreshView Refreshing="OnRefresh">
+            <ScrollView >
+                <StackLayout>
+                    <Label HorizontalOptions="StartAndExpand"   
+                                TextColor="Black"
+                               FontSize="Medium"
+                                Padding="5">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Total expenses "/>
+                                <Span Text=" - " />
+                                <Span Text="{Binding AllExpenses}" TextColor="Red"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label HorizontalOptions="StartAndExpand" 
+                                TextColor="Black"
+                               FontSize="Medium"
+                                Padding="5">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Total income "/>
+                                <Span Text=" - " />
+                                <Span Text="{Binding AllIncome}" TextColor="Green"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <forms:ChartView x:Name="Chartt" HeightRequest="300" Chart="{Binding ExpChart}" />
+                    <Label VerticalOptions="Center"
+                                TextColor="Black"
+                               FontSize="Medium"
+                                Padding="5"
+                           Text="Wallets info">
+                    </Label>
+                    <forms:ChartView HeightRequest="300" Chart="{Binding RadChart}" />
+                </StackLayout>
+            </ScrollView>
+        </RefreshView>
+    </StackLayout>
+
 </ContentPage>

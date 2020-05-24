@@ -17,6 +17,7 @@ namespace FinManager.Model
         public DateTime Date { get; set; }
         [Ignore]
         public string Cat { get; set; }
+
         public static string GetCategory(int id)
         {
             return App.Categories.GetCategory(id).Name;

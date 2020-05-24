@@ -14,17 +14,17 @@ namespace FinManager
         public const string DATABASE_NOTES = "notess.db";
         public const string DATABASE_CATEGORIES = "categories.db";
         public const string DATABASE_WALLETS = "walltes.db";
-        public static NoteAsyncRep notes;
+        public static NoteRep notes;
         public static WalletRep wallets;
         public static CategRep categories;
 
-        public static NoteAsyncRep Notes
+        public static NoteRep Notes
         {
             get
             {
                 if (notes == null)
                 {
-                    notes = new NoteAsyncRep(Path.Combine(
+                    notes = new NoteRep(Path.Combine(
                     Environment.GetFolderPath(
                         Environment.SpecialFolder.LocalApplicationData), DATABASE_NOTES));
                 }
@@ -43,7 +43,7 @@ namespace FinManager
                     Wallet wal = null;
                     if (!File.Exists(dbPath))
                     {
-                        wal = new Wallet { Sum = 130, WalName = "Card" };
+                        wal = new Wallet { WalName = "Cash" };
                     }
                     wallets = new WalletRep(dbPath);
                     if (wal != null)
