@@ -4,6 +4,6 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="FinManager.View.MainPage">
+             x:Class="FinManager.View.MainPage" BarBackgroundColor="{StaticResource Key=menuColor}">
   <!--Pages can be added as references or inline-->
 </TabbedPage>

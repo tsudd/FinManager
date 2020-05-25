@@ -17,14 +17,13 @@ namespace FinManager.ViewModel
     {
         public ObservableCollection<NoteViewModel> List { get; set; }
         public ObservableCollection<Grouping<string, NoteViewModel>> NoteGroups { get; set; }
-        public List<Wallet> Wallets { get; set; }
-        public List<Category> Categories { get; set; }
 
         public delegate void UpdateLists();
         public event PropertyChangedEventHandler PropertyChanged;
         public delegate void Notification(string msg);
         public event Notification UserNotify;
-
+        public List<Wallet> Wallets { get; private set; }
+        public List<Category> Categories { get; private set; }
         public INavigation Navigation { get; set; }
 
         public ICommand CreateNoteCommand { protected set; get; }
@@ -149,9 +148,9 @@ namespace FinManager.ViewModel
 
         public void SyncInfo()
         {
+            List?.Clear();
             Wallets?.Clear();
             Categories?.Clear();
-            List?.Clear();
             Wallets = App.Wallets.GetWallets();
             Categories = App.Categories.GetCategories();
             var table = new ObservableCollection<Note>(App.Notes.GetNotes());

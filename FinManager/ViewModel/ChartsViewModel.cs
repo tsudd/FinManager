@@ -7,7 +7,10 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
+using Color = Xamarin.Forms.Color;
+using Entry = Microcharts.Entry;
 
 namespace FinManager.ViewModel
 {
@@ -41,11 +44,13 @@ namespace FinManager.ViewModel
             ExpChart = new BarChart()
             {
                 LabelTextSize = 40f,
+                BackgroundColor = SKColor.Parse(App.theme),
 
             };
             RadChart = new RadialGaugeChart()
             {
                 LabelTextSize = 40f,
+                BackgroundColor = SKColor.Parse(App.theme),
             };
             Entries = new List<Entry>();
             FillLists();
@@ -157,8 +162,7 @@ namespace FinManager.ViewModel
         private static string HexConverter()
         { 
             var rand = new Random();
-            var c = Color.FromArgb(rand.Next(0, 255), rand.Next(0, 255), rand.Next(0, 255));
-            return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
+            return "#" + rand.Next(0, 255).ToString("X2") + rand.Next(0, 255).ToString("X2") + rand.Next(0, 255).ToString("X2");
         }
     }
 }

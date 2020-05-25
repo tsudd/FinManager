@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="FinManager.View.CategoriesPage" Title="Manage Categories">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="{StaticResource Key=backColor}">
             <ListView x:Name="notesList" ItemsSource="{Binding Categories}" 
                       HasUnevenRows="True"
                       CachingStrategy="RecycleElement"
@@ -33,7 +33,7 @@
                                        VerticalOptions="CenterAndExpand"
                                        HorizontalOptions="CenterAndExpand"
                                        FontSize="Default"
-                                       TextColor="Black"
+                                       TextColor="{StaticResource Key=textColor}"
                                        Grid.Column="0"
                                        Grid.Row="0" />
                                 <BoxView BackgroundColor="{Binding Color}"
@@ -46,7 +46,7 @@
                 </ListView.ItemTemplate>
             </ListView>
             <StackLayout>
-                <Button Text="+" TextColor="Black" 
+                <Button Text="+" TextColor="{StaticResource Key=textColor}" 
                             Command="{Binding AddCategoryCommand}" 
                             HorizontalOptions="End"
                         VerticalOptions="End"/>

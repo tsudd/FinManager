@@ -6,17 +6,18 @@
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              mc:Ignorable="d"
              x:Class="FinManager.View.DiagramPage" Title="Charts">
-    <StackLayout>
+    <StackLayout BackgroundColor="{StaticResource Key=backColor}">
         <Picker FontSize="Medium" ItemsSource="{Binding Mounths}"
                              x:Name="picker" SelectedIndexChanged="SelectedMounth"
                 HorizontalOptions="CenterAndExpand"
+                TextColor="{StaticResource Key=textColor}"
                 WidthRequest="150"
                 />
         <RefreshView Refreshing="OnRefresh">
             <ScrollView >
                 <StackLayout>
                     <Label HorizontalOptions="StartAndExpand"   
-                                TextColor="Black"
+                                TextColor="{StaticResource Key=headerColor}"
                                FontSize="Medium"
                                 Padding="5">
                         <Label.FormattedText>
@@ -28,7 +29,7 @@
                         </Label.FormattedText>
                     </Label>
                     <Label HorizontalOptions="StartAndExpand" 
-                                TextColor="Black"
+                                TextColor="{StaticResource Key=headerColor}"
                                FontSize="Medium"
                                 Padding="5">
                         <Label.FormattedText>
@@ -39,14 +40,16 @@
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
-                    <forms:ChartView x:Name="Chartt" HeightRequest="300" Chart="{Binding ExpChart}" />
+                    <forms:ChartView x:Name="Chartt" HeightRequest="300" Chart="{Binding ExpChart}" 
+                                     BackgroundColor="{StaticResource Key=backColor}"/>
                     <Label VerticalOptions="Center"
-                                TextColor="Black"
+                                TextColor="{StaticResource Key=headerColor}"
                                FontSize="Medium"
                                 Padding="5"
                            Text="Wallets info">
                     </Label>
-                    <forms:ChartView HeightRequest="300" Chart="{Binding RadChart}" />
+                    <forms:ChartView HeightRequest="300" Chart="{Binding RadChart}" 
+                                     />
                 </StackLayout>
             </ScrollView>
         </RefreshView>

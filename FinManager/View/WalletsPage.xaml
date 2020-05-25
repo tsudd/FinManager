@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="FinManager.View.WalletsPage" Title="Wallets list">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="{StaticResource Key=backColor}">
             <ListView x:Name="notesList" ItemsSource="{Binding Wallets}" 
                       HasUnevenRows="True"
                       CachingStrategy="RecycleElement"
@@ -14,15 +14,17 @@
                       >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Height="40"
-                                  Text="{Binding WalName}"
-                                  TextColor="Black"
-                                  />
+                        <ViewCell Height="100">
+                            <Label Text="{Binding WalName}"
+                                  TextColor="{StaticResource Key=textColor}"
+                                   FontSize="Medium"
+                                   Padding="5"/>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
             <StackLayout>
-                <Button Text="+" TextColor="Black" 
+                <Button Text="+" TextColor="{StaticResource Key=textColor}" 
                             Command="{Binding AddWalletCommand}" 
                             HorizontalOptions="End"
                         VerticalOptions="End"/>

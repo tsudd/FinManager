@@ -6,107 +6,117 @@
              mc:Ignorable="d"
              x:Class="FinManager.View.CategoryPage" Title="Creating a category">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Enter a name" TextColor="Black" FontSize="Medium" HorizontalTextAlignment="Start" Padding="5" />
-            <Entry Text="{Binding Name}" FontSize="Medium" Keyboard="Default" />
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="50" />
-                </Grid.ColumnDefinitions>
-                <Label Text="Expense/income" TextColor="Black" 
-                       FontSize="Default" 
-                       VerticalOptions="CenterAndExpand"
-                       Grid.Row="0"
-                       Grid.Column="0" />
-                <Switch IsToggled="False" Toggled="Switchh" 
-                        Grid.Column="1"
-                        Grid.Row="0"/>
-            </Grid>
-            <Label Text="Choose a color" TextColor="Black" FontSize="Medium"/>
-            <Grid RowSpacing="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="45" />
-                    <RowDefinition Height="45"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Button BackgroundColor="#808080"
-                        BorderWidth="1"
-                        Clicked="ChooseColor"
-                        Grid.Column="0"
-                        Grid.Row="0" />
-                <Button BackgroundColor="#800080"
-                        BorderWidth="1"
-                        Clicked="ChooseColor"
-                        Grid.Column="1"
-                        Grid.Row="0"/>
-                <Button BackgroundColor="#000080"
-                        BorderWidth="1"
-                        Clicked="ChooseColor"
-                        Grid.Column="2"
-                        Grid.Row="0"/>
-                <Button BackgroundColor="#4682B4"
-                        BorderWidth="1"
-                        Clicked="ChooseColor"
-                        Grid.Column="3"
-                        Grid.Row="0"/>
-                <Button BackgroundColor="#DC143C"
-                        BorderWidth="1"
-                        Clicked="ChooseColor"
-                        Grid.Column="0"
-                        Grid.Row="1"/>
-                <Button BackgroundColor="#FFA500"
-                        BorderWidth="0"
-                        Clicked="ChooseColor"
-                        Grid.Column="1"
-                        Grid.Row="1"/>
-                <Button BackgroundColor="#800000"
-                        BorderWidth="1"
-                        Clicked="ChooseColor"
-                        Grid.Column="2"
-                        Grid.Row="1"/>
-                <Button BackgroundColor="#FFD700"
-                        BorderWidth="1"
-                        Clicked="ChooseColor"
-                        Grid.Column="3"
-                        Grid.Row="1"/>
+        <StackLayout BackgroundColor="{StaticResource Key=backColor}">
+            <StackLayout>
+                <Label Text="Enter a name" TextColor="{StaticResource Key=textColor}" 
+                       FontSize="Medium" HorizontalTextAlignment="Start" Padding="5" />
+                <Entry Text="{Binding Name}" TextColor="{StaticResource Key=subTextColor}" Keyboard="Default"
+                       PlaceholderColor="{StaticResource Key=textColor}"
+                       />
+            </StackLayout>
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="50" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Expense/income" TextColor="{StaticResource Key=textColor}" 
+                           FontSize="Medium" 
+                           VerticalOptions="CenterAndExpand"
+                           Grid.Row="0"
+                           Grid.Column="0" />
+                    <Switch IsToggled="False" Toggled="Switchh"
+                            ThumbColor="{StaticResource Key=subTextColor}"
+                            OnColor="{StaticResource Key=textColor}"
+                            
+                            Grid.Column="1"
+                            Grid.Row="0"/>
+                </Grid>
+            </StackLayout>
+            <StackLayout>
+                <Label Text="Choose a color" TextColor="{StaticResource Key=textColor}" FontSize="Medium"/>
+                <Grid RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="45"/>
+                        <RowDefinition Height="45"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button BackgroundColor="#808080"
+                            BorderWidth="1"
+                            Clicked="ChooseColor"
+                            Grid.Column="0"
+                            Grid.Row="0" />
+                    <Button BackgroundColor="#E0FFFF"
+                            BorderWidth="1"
+                            Clicked="ChooseColor"
+                            Grid.Column="1"
+                            Grid.Row="0"/>
+                    <Button BackgroundColor="#000080"
+                            BorderWidth="1"
+                            Clicked="ChooseColor"
+                            Grid.Column="2"
+                            Grid.Row="0"/>
+                    <Button BackgroundColor="#4682B4"
+                            BorderWidth="1"
+                            Clicked="ChooseColor"
+                            Grid.Column="3"
+                            Grid.Row="0"/>
+                    <Button BackgroundColor="#DC143C"
+                            BorderWidth="1"
+                            Clicked="ChooseColor"
+                            Grid.Column="0"
+                            Grid.Row="1"/>
+                    <Button BackgroundColor="#FFA500"
+                            BorderWidth="0"
+                            Clicked="ChooseColor"
+                            Grid.Column="1"
+                            Grid.Row="1"/>
+                    <Button BackgroundColor="#FF1493"
+                            BorderWidth="1"
+                            Clicked="ChooseColor"
+                            Grid.Column="2"
+                            Grid.Row="1"/>
+                    <Button BackgroundColor="#FFD700"
+                            BorderWidth="1"
+                            Clicked="ChooseColor"
+                            Grid.Column="3"
+                            Grid.Row="1"/>
+                    <Button BackgroundColor="#0000FF"
+                            BorderWidth="1"
+                            Clicked="ChooseColor"
+                            Grid.Column="0"
+                            Grid.Row="2"/>
+                    <Button BackgroundColor="#F0E68C"
+                            BorderWidth="1"
+                            Clicked="ChooseColor"
+                            Grid.Column="1"
+                            Grid.Row="2"/>
+                    <Button BackgroundColor="#8A2BE2"
+                            BorderWidth="1"
+                            Clicked="ChooseColor"
+                            Grid.Column="2"
+                            Grid.Row="2"/>
+                    <Button BackgroundColor="#6B8E23"
+                            BorderWidth="1"
+                            Clicked="ChooseColor"
+                            Grid.Column="3"
+                            Grid.Row="2"/>
 
-            </Grid>
-            <!--<RelativeLayout>
-                <ListView CachingStrategy="RecycleElement"
-                              SelectedItem="{Binding SelectedColor}"
-                              ItemsSource="{Binding LstViewModel.Colors}"
-                              RowHeight="90"
-                              Rotation="270"
-                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-45}"
-                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=-0.5, Constant=45}"
-                              RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
-                              RelativeLayout.WidthConstraint="{ConstraintExpression Type=Constant, Constant=90}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <ContentView Rotation="90" BackgroundColor="{Binding Color}">
-                                    <Label Text="{Binding Name}"
-                                                TextColor="White"
-                                                HorizontalOptions="CenterAndExpand"
-                                                VerticalOptions="CenterAndExpand"/>
-                                </ContentView>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </RelativeLayout>-->
+                </Grid>
+            </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="End">
-                <Button Text="Back" Command="{Binding Path=LstViewModel.BackCommand}" />
-                <Button Text="Done" Command="{Binding LstViewModel.SaveCategoryCommand}" 
+                <Button Text="Back" Command="{Binding Path=LstViewModel.BackCommand}" TextColor="{StaticResource Key=textColor}"/>
+                <Button Text="Done" Command="{Binding LstViewModel.SaveCategoryCommand }"
+                        TextColor="{StaticResource Key=textColor}"
                         CommandParameter="{Binding}" />
             </StackLayout>
         </StackLayout>

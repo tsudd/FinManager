@@ -6,6 +6,13 @@
              mc:Ignorable="d"
              x:Class="FinManager.App">
     <Application.Resources>
-
+        <ResourceDictionary x:Name="themee">
+            <Color x:Key="textColor">#FFFFFF</Color>
+            <Color x:Key="backColor">#000000</Color>
+            <Color x:Key="menuColor">#FF8C00</Color>
+            <Color x:Key="subTextColor">#FF8C00</Color>
+            <Color x:Key="buttonColor">#000000</Color>
+            <Color x:Key="headerColor">#FFFFFF</Color>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

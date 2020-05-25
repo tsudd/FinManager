@@ -17,6 +17,7 @@ namespace FinManager
         public static NoteRep notes;
         public static WalletRep wallets;
         public static CategRep categories;
+        public static string theme;
 
         public static NoteRep Notes
         {
@@ -85,8 +86,9 @@ namespace FinManager
         public App()
         {
             InitializeComponent();
-
+            theme = ((Color)themee["backColor"]).ToHex();
             MainPage = new NavigationPage(new MainPage());
+            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = ((Color)themee["menuColor"]);
         }
 
         protected override void OnStart()

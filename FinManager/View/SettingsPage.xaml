@@ -8,28 +8,14 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="plainButton" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#eee"/>
-                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="BackgroundColor" Value="{StaticResource Key=buttonColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource Key=textColor}" />
                 <Setter Property="BorderRadius" Value="0"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <!--<TableView>
-                <TableView.Root>
-                    <TableRoot>
-                        <TableSection Title="Data">
-                            <
-                            <Button Text="Manage wallets" />
-                            <Button Text="Manage categoried" />
-                        </TableSection>
-                        <TableSection Title="Themes">
-                            
-                        </TableSection>
-                    </TableRoot>
-                </TableView.Root>
-            </TableView>-->
+        <StackLayout BackgroundColor="{StaticResource Key=backColor}">
             <Grid RowSpacing="0" VerticalOptions="CenterAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100" />

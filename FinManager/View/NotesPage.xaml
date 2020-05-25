@@ -6,8 +6,8 @@
              mc:Ignorable="d"
              x:Class="FinManager.View.NotesPage" Title="Notes">
     <ContentPage.Content>
-        <StackLayout>
-            <Label x:Name="bal" TextColor="Blue"
+        <StackLayout BackgroundColor="{StaticResource Key=backColor}">
+            <Label x:Name="bal" TextColor="{StaticResource Key=headerColor}"
                        FontSize="Large"
                        VerticalTextAlignment="Start"
                        HorizontalTextAlignment="Center">
@@ -28,7 +28,9 @@
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell Height="25">
-                            <Label Text="{Binding Name}" FontSize="Caption" TextColor="Black" Padding="4"/>
+                            <Label Text="{Binding Name}" FontSize="Caption" 
+                                   TextColor="{StaticResource Key=headerColor}" 
+                                   Padding="4"/>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.GroupHeaderTemplate>
@@ -41,19 +43,27 @@
                                           IsDestructive="True"
                                           Text="Delete" />
                             </ViewCell.ContextActions>
-                            <StackLayout Orientation="Horizontal" >
+                            <StackLayout Orientation="Horizontal">
                                 <Label HorizontalOptions="StartAndExpand" 
-                                            VerticalTextAlignment="Center"
-                                            TextColor="Black"
-                                       Padding="5">
+                                                VerticalTextAlignment="Center"
+                                                TextColor="{StaticResource Key=textColor}"
+                                           Padding="5"
+                                           Grid.Row="0"
+                                           Grid.Column="0">
                                     <Label.FormattedText>
                                         <FormattedString>
                                             <Span Text="{Binding Category}"/>
                                             <Span Text=" - " />
-                                            <Span Text="{Binding Sum}" TextColor="Red"/>
+                                            <Span Text="{Binding Sum}" TextColor="{Binding ExpIn}"/>
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
+                                <Label Text="{Binding WalName}" TextColor="{StaticResource subTextColor}"
+                                               FontSize="Body"
+                                        WidthRequest="50"
+                                               VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <BoxView Color="{Binding Color}" WidthRequest="80"
+                                                 VerticalOptions="End" HorizontalOptions="End"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
@@ -61,7 +71,8 @@
 
             </ListView>
             <StackLayout>
-                <Button Text="+" TextColor="Black" 
+                <Button Text="+" TextColor="{StaticResource Key=textColor}" 
+                        BackgroundColor="{StaticResource Key=buttonColor}"
                             Command="{Binding CreateNoteCommand}" 
                             HorizontalOptions="End"
                         VerticalOptions="End"/>

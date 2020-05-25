@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="FinManager.View.NotePage" Title="Creating a note">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="{StaticResource Key=backColor}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50" />
@@ -16,7 +16,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Label Text="Date - " 
-                       TextColor="Black" 
+                       TextColor="{StaticResource Key=headerColor}" 
                        FontSize="Medium"
                        VerticalOptions="Center" 
                        HorizontalOptions="Center"
@@ -31,7 +31,7 @@
                     <DatePicker.MinimumDate>1/01/2020</DatePicker.MinimumDate>
                 </DatePicker>
             </Grid>
-            <Label Text="Choose a wallet" TextColor="Black" FontSize="Medium" />
+            <Label Text="Choose a wallet" TextColor="{StaticResource Key=headerColor}" FontSize="Medium" />
             <RelativeLayout HeightRequest="90">
                 <ListView CachingStrategy="RecycleElement"
                               x:Name="wlts"
@@ -51,14 +51,14 @@
                                                HorizontalOptions="Center" 
                                                VerticalOptions="Center" 
                                                FontSize="Medium" 
-                                               TextColor="Black"/>
+                                               TextColor="{StaticResource Key=textColor}"/>
                                 </ContentView>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </RelativeLayout>
-            <Label Text="Choose a category" TextColor="Black" FontSize="Medium" />
+            <Label Text="Choose a category" TextColor="{StaticResource Key=headerColor}" FontSize="Medium" />
             <RelativeLayout>
                 <ListView CachingStrategy="RecycleElement"
                               SelectedItem="{Binding SelectedCategory}"
@@ -79,7 +79,7 @@
                                                      AbsoluteLayout.LayoutFlags="PositionProportional"/>
                                         </AbsoluteLayout>
                                         <Label Text="{Binding Name}"
-                                                    TextColor="Black"
+                                                    TextColor="{StaticResource Key=textColor}"
                                                     HorizontalOptions="CenterAndExpand"
                                                     VerticalOptions="CenterAndExpand"
                                         />
@@ -91,12 +91,17 @@
                 </ListView>
             </RelativeLayout>
             <StackLayout>
-                <Label x:Name ="lbl" Text="Amount of an expense" FontSize="Medium" />
-                <Entry Text="{Binding Amount}" FontSize="Medium" Keyboard="Numeric"/>
+                <Label x:Name ="lbl" Text="Amount" FontSize="Medium" TextColor="{StaticResource Key=headerColor}"/>
+                <Entry Text="{Binding Amount}" FontSize="Medium" Keyboard="Numeric" 
+                       TextColor="{StaticResource Key=subTextColor}"
+                       PlaceholderColor="{StaticResource Key=textColor}"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="End">
-                <Button Text="Back" Command="{Binding Path=ListViewModel.BackCommand}" />
+                <Button Text="Back" Command="{Binding Path=ListViewModel.BackCommand}" TextColor="{StaticResource Key=textColor}"
+                        BackgroundColor="{StaticResource Key=buttonColor}"/>
                 <Button Text="Done" Command="{Binding ListViewModel.SaveNoteCommand}" 
+                        TextColor="{StaticResource Key=textColor}"
+                        BackgroundColor="{StaticResource Key=buttonColor}"
                         CommandParameter="{Binding}" />
             </StackLayout>
         </StackLayout>

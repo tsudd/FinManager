@@ -147,5 +147,20 @@ namespace FinManager.ViewModel
         {
             get { return Expense.Date.ToString("d"); }
         }
+
+        public string Color
+        {
+            get { return App.Categories.GetCategory(Expense.CatId).Color; }
+        }
+
+        public string WalName
+        {
+            get { return App.Wallets.GetWallet(Expense.WalId).WalName; }
+        }
+
+        public string ExpIn
+        {
+            get { return App.Categories.GetCategory(Expense.CatId).InCome?"Green":"Red";}
+        }
     }
 }

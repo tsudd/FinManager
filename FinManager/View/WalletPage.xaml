@@ -6,10 +6,13 @@
              mc:Ignorable="d"
              x:Class="FinManager.View.WalletPage" Title="Creating a wallet">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="{StaticResource Key=backColor}">
             <StackLayout>
-                <Label x:Name ="lbl" Text="Name of the wallet" FontSize="Medium" />
-                <Entry Text="{Binding WalName}" FontSize="Medium" />
+                <Label x:Name ="lbl" Text="Name of the wallet" FontSize="Medium"
+                       TextColor="{StaticResource Key=textColor}"
+                       Padding="5"/>
+                <Entry Text="{Binding WalName}" FontSize="Medium" TextColor="{StaticResource Key=subTextColor}"
+                    PlaceholderColor="{StaticResource Key=textColor}"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="End">
                 <Button Text="Back" Command="{Binding Path=ListViewModel.BackCommand}" />
