@@ -27,7 +27,9 @@
                 <Button Text="+" TextColor="{StaticResource Key=textColor}" 
                             Command="{Binding AddWalletCommand}" 
                             HorizontalOptions="End"
-                        VerticalOptions="End"/>
+                        VerticalOptions="End"
+                        BackgroundColor="{StaticResource Key=menuColor}"
+                        FontSize="Medium"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

@@ -9,11 +9,10 @@ using System.Collections.ObjectModel;
 
 namespace FinManager.Data
 {
-    public class CategRep : INotifyPropertyChanged
+    public class CategRep
     {
         readonly SQLiteConnection database;
 
-        public event PropertyChangedEventHandler PropertyChanged;
         public CategRep(string dBPath)
         {
             database = new SQLiteConnection(dBPath);
@@ -48,11 +47,6 @@ namespace FinManager.Data
             {
                 return database.Insert(cat);
             }
-        }
-
-        protected void OnPropertyChanged(string propName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
     }

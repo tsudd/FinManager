@@ -31,11 +31,5 @@ namespace FinManager.Model
             Name = "SOMETHING";
         }
 
-        public Category(string nm, string clr, bool inCom = false)
-        {
-            Color = clr;
-            Name = nm.Trim().ToUpper();
-            InCome = inCom;
-        }
     }
 }

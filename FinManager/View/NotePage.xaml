@@ -27,6 +27,7 @@
                             Grid.Column="1" Grid.Row="0" 
                             HorizontalOptions="Center"
                             VerticalOptions="Center"
+                            TextColor="{StaticResource Key=textColor}"
                             MaximumDate="{Binding DateTime}">
                     <DatePicker.MinimumDate>1/01/2020</DatePicker.MinimumDate>
                 </DatePicker>
@@ -98,10 +99,10 @@
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="End">
                 <Button Text="Back" Command="{Binding Path=ListViewModel.BackCommand}" TextColor="{StaticResource Key=textColor}"
-                        BackgroundColor="{StaticResource Key=buttonColor}"/>
+                        BackgroundColor="{StaticResource Key=menuColor}"/>
                 <Button Text="Done" Command="{Binding ListViewModel.SaveNoteCommand}" 
                         TextColor="{StaticResource Key=textColor}"
-                        BackgroundColor="{StaticResource Key=buttonColor}"
+                        BackgroundColor="{StaticResource Key=menuColor}"
                         CommandParameter="{Binding}" />
             </StackLayout>
         </StackLayout>

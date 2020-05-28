@@ -16,7 +16,7 @@ namespace FinManager.ViewModel
         {
             Category = new Category();
         }
-
+    
         public CategoryViewModel(Category category)
         {
             Category = new Category

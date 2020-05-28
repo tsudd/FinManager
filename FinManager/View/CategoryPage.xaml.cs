@@ -21,6 +21,7 @@ namespace FinManager.View
             CategoryView = viewModel;
             this.BindingContext = CategoryView;
             InitializeComponent();
+            switcher.IsToggled = CategoryView.Category.InCome;
         }
 
         private void Switchh(object sender, ToggledEventArgs e)

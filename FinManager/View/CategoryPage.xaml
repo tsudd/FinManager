@@ -11,7 +11,7 @@
                 <Label Text="Enter a name" TextColor="{StaticResource Key=textColor}" 
                        FontSize="Medium" HorizontalTextAlignment="Start" Padding="5" />
                 <Entry Text="{Binding Name}" TextColor="{StaticResource Key=subTextColor}" Keyboard="Default"
-                       PlaceholderColor="{StaticResource Key=textColor}"
+                       PlaceholderColor="{StaticResource Key=textColor}" MaxLength="25"
                        />
             </StackLayout>
             <StackLayout>
@@ -28,7 +28,7 @@
                            VerticalOptions="CenterAndExpand"
                            Grid.Row="0"
                            Grid.Column="0" />
-                    <Switch IsToggled="False" Toggled="Switchh"
+                    <Switch x:Name="switcher" IsToggled="False" Toggled="Switchh"
                             ThumbColor="{StaticResource Key=subTextColor}"
                             OnColor="{StaticResource Key=textColor}"
                             
@@ -114,10 +114,13 @@
                 </Grid>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="End">
-                <Button Text="Back" Command="{Binding Path=LstViewModel.BackCommand}" TextColor="{StaticResource Key=textColor}"/>
+                <Button Text="Back" Command="{Binding Path=LstViewModel.BackCommand}"
+                        TextColor="{StaticResource Key=textColor}"
+                        BackgroundColor="{StaticResource Key=menuColor}"/>
                 <Button Text="Done" Command="{Binding LstViewModel.SaveCategoryCommand }"
                         TextColor="{StaticResource Key=textColor}"
-                        CommandParameter="{Binding}" />
+                        CommandParameter="{Binding}" 
+                        BackgroundColor="{StaticResource Key=menuColor}"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

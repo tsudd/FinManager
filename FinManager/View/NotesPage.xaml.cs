@@ -25,14 +25,13 @@ namespace FinManager.View
 
         protected override void OnAppearing()
         {
-            noteList.MakeGrouping();
+            noteList.SyncInfo();
             base.OnAppearing();
         }
 
         public void OnRefresh(object sender, EventArgs e)
         {
             var list = (ListView)sender;
-            noteList.MakeGrouping();
             noteList.SyncInfo();
             list.IsRefreshing = false;
         }

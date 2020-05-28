@@ -9,13 +9,11 @@ using System.Collections.ObjectModel;
 
 namespace FinManager.Data
 {
-    public class WalletRep : INotifyPropertyChanged
+    public class WalletRep
     {
         readonly SQLiteConnection database;
 
         public double balance;
-
-        public event PropertyChangedEventHandler PropertyChanged;
         public WalletRep(string dBPath)
         {
             database = new SQLiteConnection(dBPath);
@@ -35,18 +33,27 @@ namespace FinManager.Data
 
         }
 
-        public void ChangeSum(Note note, bool add = true)
+        public void ChangeSum(Note note, bool add = true, bool noteChanged = true)
         {
             var wal = GetWallet(note.WalId);
             var cat = App.Categories.GetCategory(note.CatId);
-            if (note.ID != 0)
+            if (note.ID != 0 && noteChanged)
             {
                 wal.Sum += Math.Pow(-1, cat.InCome?1.0:0) * note.Sum;
             }
             if (add)
-                wal.Sum += (-1)*Math.Pow(-1, cat.InCome?1.0:0) * note.Sum;
+                wal.Sum += (-1) * Math.Pow(-1, cat.InCome ? 1.0 : 0) * note.Sum;
             SaveWallet(wal);
             BalanceSync();
+        }
+
+        public void CalcNotes(int id, bool add = true, bool changed = true)
+        {
+            var notes = App.Notes.GetNotesWithCat(id);
+            foreach(var i in notes)
+            {
+                ChangeSum(i, add, changed);
+            }
         }
 
         public int DeleteWallet(int id)
@@ -75,7 +82,6 @@ namespace FinManager.Data
             {
                 balance += i.Sum;
             }
-            //OnPropertyChanged("Balance");
 
         }
 
@@ -83,11 +89,6 @@ namespace FinManager.Data
         {
             get { return balance; }
             set { balance = value; }
-        }
-
-        protected void OnPropertyChanged(string propName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
     }

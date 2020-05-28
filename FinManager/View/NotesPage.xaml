@@ -72,8 +72,9 @@
             </ListView>
             <StackLayout>
                 <Button Text="+" TextColor="{StaticResource Key=textColor}" 
-                        BackgroundColor="{StaticResource Key=buttonColor}"
+                        BackgroundColor="{StaticResource Key=menuColor}"
                             Command="{Binding CreateNoteCommand}" 
+                        FontSize="Medium"
                             HorizontalOptions="End"
                         VerticalOptions="End"/>
             </StackLayout>

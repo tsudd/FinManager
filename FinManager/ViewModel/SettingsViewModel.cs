@@ -8,13 +8,12 @@ using Xamarin.Forms;
 
 namespace FinManager.ViewModel
 {
-    class SettingsViewModel: INotifyPropertyChanged
+    class SettingsViewModel
     {
         public ICommand ChangeThemeCommand { protected set; get; }
         public ICommand ManageWalletsCommand { protected set; get; }
         public ICommand ManageCategoriesCommand { protected set; get; }
         public ICommand ChangeLanguageCommand { protected set; get; }
-        public event PropertyChangedEventHandler PropertyChanged;
         public INavigation Navigation { get; set; }
 
         public SettingsViewModel()
@@ -23,11 +22,6 @@ namespace FinManager.ViewModel
             ManageWalletsCommand = new Command(ManageWallets);
             ManageCategoriesCommand = new Command(ManageCategories);
             ChangeLanguageCommand = new Command(ChangeLanguage);
-        }
-
-        protected void OnPropertyChanged(string propName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
         private void ChangeTheme()

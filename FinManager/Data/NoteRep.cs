@@ -56,12 +56,15 @@ namespace FinManager.Data
             var notes = database.Table<Note>().Where(x => x.CatId == id).ToList();
             foreach(var i in notes)
             {
-                if (i.CatId == id)
-                {
-                    i.CatId = 1;
-                    SaveNote(i);
-                }    
+                i.CatId = 1;
+                SaveNote(i); 
             }
+        }
+
+        public List<Note> GetNotesWithCat(int id)
+        {
+            var notes = database.Table<Note>().Where(x => x.CatId == id).ToList();
+            return notes;
         }
 
         public  List<Note> GetExactNotes(DateTime dt)

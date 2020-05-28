@@ -18,7 +18,6 @@ namespace FinManager.ViewModel
         public ObservableCollection<NoteViewModel> List { get; set; }
         public ObservableCollection<Grouping<string, NoteViewModel>> NoteGroups { get; set; }
 
-        public delegate void UpdateLists();
         public event PropertyChangedEventHandler PropertyChanged;
         public delegate void Notification(string msg);
         public event Notification UserNotify;
@@ -45,6 +44,7 @@ namespace FinManager.ViewModel
         {
             if (List.Count == 0)
             {
+                NoteGroups?.Clear();
                 return;
             }    
             var group = List.GroupBy(p => p.Date)
@@ -114,6 +114,9 @@ namespace FinManager.ViewModel
                     List.Add(note);
                 }
                 App.Notes.SaveNote(note.Expense);
+                SyncInfo();
+                OnPropertyChanged("NotesGroups");
+                OnPropertyChanged("List");
                 OnPropertyChanged("Balance");
             }
             Back();
@@ -158,6 +161,8 @@ namespace FinManager.ViewModel
             {
                 List.Add(new NoteViewModel(i));
             }
+            MakeGrouping();
+            OnPropertyChanged("Balance");
         }
     }
 }

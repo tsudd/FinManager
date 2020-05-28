@@ -58,8 +58,11 @@ namespace FinManager.ViewModel
                 {
                     GetItems();
                     OnPropertyChanged("Categories");
+                    App.Wallets.CalcNotes(categoryView.Category.ID, false, true);
                 }
                 App.Categories.SaveCategory(categoryView.Category);
+                App.Wallets.CalcNotes(categoryView.Category.ID, true, false);
+                App.Wallets.BalanceSync();
             }
             Back();
 

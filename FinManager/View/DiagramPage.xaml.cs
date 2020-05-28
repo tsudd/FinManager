@@ -38,6 +38,13 @@ namespace FinManager.View
             ChartsView.PickedDate((string)selected ?? "");
         }
 
+        protected override void OnAppearing()
+        {
+            ChartsView.UpdateCharts();
+            picker.SelectedItem = selected;
+            base.OnAppearing();
+        }
+
         public void OnRefresh(object sender, EventArgs e)
         {
             var list = (RefreshView)sender;

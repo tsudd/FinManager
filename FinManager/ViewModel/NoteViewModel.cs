@@ -48,6 +48,7 @@ namespace FinManager.ViewModel
             };
             chosenDate = note.Date;
             Expense.Cat = Note.GetCategory(Expense.CatId);
+            sum = Expense.Sum.ToString();
         }
 
         public Wallet SelectedWallet
@@ -103,14 +104,6 @@ namespace FinManager.ViewModel
                     lvm = value;
                     OnPropertyChanged("ListViewModel");
                 }
-            }
-        }
-
-        public bool IsValid
-        {
-            get
-            {
-                return (!string.IsNullOrEmpty(Sum.Trim()));
             }
         }
 

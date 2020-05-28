@@ -3,6 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <Authors>tsudd</Authors>
+    <Description>A simple app for managing your finences.</Description>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageTags>Finences</PackageTags>
+    <RepositoryType>GitHub</RepositoryType>
+    <RepositoryUrl>https://github.com/tsudd/FinManager</RepositoryUrl>
+    <PackageIcon>web_hi_res_512.png</PackageIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

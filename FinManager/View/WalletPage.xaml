@@ -12,12 +12,16 @@
                        TextColor="{StaticResource Key=textColor}"
                        Padding="5"/>
                 <Entry Text="{Binding WalName}" FontSize="Medium" TextColor="{StaticResource Key=subTextColor}"
-                    PlaceholderColor="{StaticResource Key=textColor}"/>
+                    PlaceholderColor="{StaticResource Key=textColor}" MaxLength="25"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="End">
-                <Button Text="Back" Command="{Binding Path=ListViewModel.BackCommand}" />
+                <Button Text="Back" Command="{Binding Path=ListViewModel.BackCommand}" 
+                        BackgroundColor="{StaticResource Key=menuColor}"
+                        TextColor="{StaticResource Key=textColor}"/>
                 <Button Text="Done" Command="{Binding ListViewModel.SaveWalletCommand}" 
-                        CommandParameter="{Binding}" />
+                        CommandParameter="{Binding}" 
+                        BackgroundColor="{StaticResource Key=menuColor}"
+                        TextColor="{StaticResource Key=textColor}"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
