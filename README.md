@@ -28,3 +28,4 @@ git clone https://github.com/tsudd/FinManager.git
 - [ ] Localization
 - [ ] Choosing themes
 - [ ] Smarter analysis
+- [ ] Infinite scroll in note list
