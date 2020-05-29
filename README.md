@@ -29,3 +29,4 @@ git clone https://github.com/tsudd/FinManager.git
 - [ ] Choosing themes
 - [ ] Smarter analysis
 - [ ] Infinite scroll in note list
+- [ ] Better design
