@@ -22,7 +22,6 @@ namespace FinManager.View
             InitializeComponent();
             categoryList = new CategoryListViewModel() { Navigation = this.Navigation };
             BindingContext = categoryList;
-            categoryList.UserNotify += Notification;
         }
 
         public void OnDelete(object sender, EventArgs e)
@@ -30,11 +29,5 @@ namespace FinManager.View
             CategoryViewModel cat = ((MenuItem)sender).CommandParameter as CategoryViewModel;
             categoryList.DelCategory(cat);
         }
-
-        private async void Notification(string msg)
-        {
-            await DisplayAlert("Message", msg, "OK");
-        }
-
     }
 }

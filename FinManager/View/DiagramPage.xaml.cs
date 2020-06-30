@@ -23,7 +23,7 @@ namespace FinManager.View
             InitializeComponent();
             ChartsView = new ChartsViewModel();
             this.BindingContext = ChartsView;
-            picker.SelectedItem = ChartsView.Mounths.Count != 0 ? ChartsView.Mounths[0] : null;
+            picker.SelectedItem = ChartsView.Months.Count != 0 ? ChartsView.Months[0] : null;
             selected = picker.SelectedItem;
             
         }
@@ -53,7 +53,7 @@ namespace FinManager.View
             picker.SelectedItem = selected;
             if (selected == null)
             {
-                picker.SelectedItem = ChartsView.Mounths.Count != 0 ? ChartsView.Mounths[0] : null;
+                picker.SelectedItem = ChartsView.Months.Count != 0 ? ChartsView.Months[0] : null;
                 selected = picker.SelectedItem;
             }
             

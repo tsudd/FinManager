@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              x:Class="FinManager.View.DiagramPage" Title="Charts">
     <StackLayout BackgroundColor="{StaticResource Key=backColor}">
-        <Picker FontSize="Medium" ItemsSource="{Binding Mounths}"
+        <Picker FontSize="Medium" ItemsSource="{Binding Months}"
                              x:Name="picker" SelectedIndexChanged="SelectedMounth"
                 HorizontalOptions="CenterAndExpand"
                 TextColor="{StaticResource Key=textColor}"

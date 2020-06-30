@@ -19,8 +19,6 @@ namespace FinManager.ViewModel
         public ObservableCollection<Grouping<string, NoteViewModel>> NoteGroups { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public delegate void Notification(string msg);
-        public event Notification UserNotify;
         public List<Wallet> Wallets { get; private set; }
         public List<Category> Categories { get; private set; }
         public INavigation Navigation { get; set; }
@@ -75,11 +73,6 @@ namespace FinManager.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
-        protected void OnNotify(string msg)
-        {
-            UserNotify?.Invoke(msg);
-        }
-
         private void CreateNote()
         {
             Navigation.PushAsync(new NotePage(new NoteViewModel() { ListViewModel = this }));
@@ -99,14 +92,14 @@ namespace FinManager.ViewModel
                 {
                     if (ans == 0)
                     {
-                        OnNotify("Amount should be more than zero.");
+                        App.OnNotify("Amount should be more than zero.");
                         return;
                     }
                     note.Expense.Sum = ans;
                 }
                 else
                 {
-                    OnNotify("Wrong amount input. Can't save this note.");
+                    App.OnNotify("Wrong amount input. Can't save this note.");
                     return;
                 }
                 if (note.Expense.ID == 0)
@@ -138,22 +131,9 @@ namespace FinManager.ViewModel
             get { return App.Wallets.Balance.ToString(); }
         }
 
-        private void GetItems()
-        {
-            List?.Clear();
-            var table = new ObservableCollection<Note>(App.Notes.GetNotes());
-            table.Reverse<Note>();
-            foreach (var i in table)
-            {
-                List.Add(new NoteViewModel(i));
-            }
-        }
-
         public void SyncInfo()
         {
-            List?.Clear();
-            Wallets?.Clear();
-            Categories?.Clear();
+            List.Clear();
             Wallets = App.Wallets.GetWallets();
             Categories = App.Categories.GetCategories();
             var table = new ObservableCollection<Note>(App.Notes.GetNotes());
@@ -163,6 +143,7 @@ namespace FinManager.ViewModel
             }
             MakeGrouping();
             OnPropertyChanged("Balance");
+            OnPropertyChanged("List");
         }
     }
 }

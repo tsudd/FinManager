@@ -19,7 +19,6 @@ namespace FinManager.View
             InitializeComponent();
             walletList = new WalletListViewModel() { Navigation = this.Navigation };
             this.BindingContext = walletList;
-            walletList.UserNotify += Notification;
         }
 
         public void OnDelete(object sender, EventArgs e)
@@ -27,11 +26,5 @@ namespace FinManager.View
             WalletViewModel cat = ((MenuItem)sender).CommandParameter as WalletViewModel;
             walletList.DelWallet(cat);
         }
-
-        private async void Notification(string msg)
-        {
-            await DisplayAlert("Message", msg, "OK");
-        }
-
     }
 }

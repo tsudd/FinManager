@@ -17,16 +17,13 @@ namespace FinManager.ViewModel
     public class ChartsViewModel : INotifyPropertyChanged
     {
         private List<Note> notes;
-        private List<Wallet> wallets;
-        private List<Category> categories;
         private SortedDictionary<int, double> catSums;
         private SortedDictionary<int, bool> catSyn;
-        private SortedDictionary<string, DateTime> mounths;
-        private SortedDictionary<int, double> walSums;
+        private SortedDictionary<string, DateTime> months;
         public event PropertyChangedEventHandler PropertyChanged;
         public Chart ExpChart { get; private set; }
         public Chart RadChart { get; private set; }
-        public List<string> Mounths { get; private set; }
+        public List<string> Months { get; private set; }
         private DateTime date;
         public List<Entry> Entries { get; private set; }
         public List<Entry> WalletsSums { get; private set; }
@@ -36,10 +33,9 @@ namespace FinManager.ViewModel
         public ChartsViewModel()
         {
             date = DateTime.Today;
-            mounths = new SortedDictionary<string, DateTime>();
+            months = new SortedDictionary<string, DateTime>();
             catSums = new SortedDictionary<int, double>();
             catSyn = new SortedDictionary<int, bool>();
-            walSums = new SortedDictionary<int, double>();
             WalletsSums = new List<Entry>();
             ExpChart = new BarChart()
             {
@@ -62,28 +58,21 @@ namespace FinManager.ViewModel
             {
                 return;
             }
-            date = mounths[key];
+            date = months[key];
         }
 
         private void FillLists()
         {
-            notes?.Clear();
-            wallets?.Clear();
-            categories?.Clear();
-            Mounths?.Clear();
-            catSyn?.Clear();
-            catSums?.Clear();
-            mounths?.Clear();
-            WalletsSums?.Clear();
+            catSums.Clear();
+            catSyn.Clear();
+            months.Clear();
             AllExpenses = 0;
             AllIncome = 0;
             Balance = 0;
             Entries?.Clear();
-            Mounths = App.Notes.GetDateTimes(mounths);
-            wallets = App.Wallets.GetWallets();
-            categories = App.Categories.GetCategories();
+            Months = App.Notes.GetDateTimes(months);
             notes = App.Notes.GetExactNotes(date);
-            foreach (var i in categories)
+            foreach (var i in App.CategoriesList)
             {
                 catSums.Add(i.ID, 0);
                 catSyn.Add(i.ID, i.InCome);
@@ -112,7 +101,7 @@ namespace FinManager.ViewModel
         {
             Entries.Clear();
             WalletsSums.Clear();
-            foreach (var i in categories)
+            foreach (var i in App.CategoriesList)
             {
                 if (i.InCome)
                 {
@@ -121,9 +110,10 @@ namespace FinManager.ViewModel
                 Entries.Add(new Entry((float)catSums[i.ID]) {
                     Label = i.Name,
                     ValueLabel = ((float)catSums[i.ID]).ToString(),
-                    Color = SKColor.Parse(i.Color) });
+                    Color = SKColor.Parse(i.Color) 
+                });
             }
-            foreach (var i in wallets)
+            foreach (var i in App.WalletsList)
             {
                 WalletsSums.Add(new Entry((float)i.Sum)
                 {
@@ -150,7 +140,7 @@ namespace FinManager.ViewModel
             FillLists();
             OnPropertyChanged("AllIncome");
             OnPropertyChanged("AllExpenses");
-            OnPropertyChanged("Mounths");
+            OnPropertyChanged("Months");
             OnPropertyChanged("Balance");
         }
 

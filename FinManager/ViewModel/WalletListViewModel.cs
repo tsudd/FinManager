@@ -19,8 +19,6 @@ namespace FinManager.ViewModel
         public ICommand DeleteCommand { get; protected set; }
         public INavigation Navigation { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
-        public delegate void Notificat(string msg);
-        public event Notificat UserNotify;
         private WalletViewModel selectedWallet;
         public WalletListViewModel()
         {
@@ -40,11 +38,6 @@ namespace FinManager.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
-        protected void OnNotify(string msg)
-        {
-            UserNotify?.Invoke(msg);
-        }
-
         private void SaveWallet(object catObj)
         {
             WalletViewModel walletView = catObj as WalletViewModel;
@@ -60,6 +53,7 @@ namespace FinManager.ViewModel
                     OnPropertyChanged("Wallets");
                 }
                 App.Wallets.SaveWallet(walletView.Wallet);
+                App.SyncWallets();
             }
             Back();
 
@@ -71,12 +65,13 @@ namespace FinManager.ViewModel
             {
                 if (walletView.Wallet.ID == 1)
                 {
-                    OnNotify("You can't delete this wallet!");
+                    App.OnNotify("You should have at least one wallet!");
                     return;
                 }
                 Wallets.Remove(walletView);
                 App.Notes.AdjustNotes(walletView.Wallet.ID);
                 App.Wallets.DeleteWallet(walletView.Wallet.ID);
+                App.SyncWallets();
                 OnPropertyChanged("Categories");
             }
         }
@@ -104,8 +99,7 @@ namespace FinManager.ViewModel
         private void GetItems()
         {
             Wallets.Clear();
-            var table = new ObservableCollection<Wallet>(App.Wallets.GetWallets());
-            foreach (var i in table)
+            foreach (var i in App.WalletsList)
             {
                 Wallets.Add(new WalletViewModel(i));
             }

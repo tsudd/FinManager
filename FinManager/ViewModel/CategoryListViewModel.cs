@@ -19,8 +19,6 @@ namespace FinManager.ViewModel
         public ICommand BackCommand { get; protected set; }
         public INavigation Navigation { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
-        public delegate void Notificat(string msg);
-        public event Notificat UserNotify;
         private CategoryViewModel selectedCategory;
         public CategoryListViewModel()
         {
@@ -40,11 +38,6 @@ namespace FinManager.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
-        protected void OnNotify(string msg)
-        {
-            UserNotify?.Invoke(msg);
-        }
-
         private void SaveCategory(object catObj)
         {
             CategoryViewModel categoryView = catObj as CategoryViewModel;
@@ -61,6 +54,7 @@ namespace FinManager.ViewModel
                     App.Wallets.CalcNotes(categoryView.Category.ID, false, true);
                 }
                 App.Categories.SaveCategory(categoryView.Category);
+                App.SyncCategories();
                 App.Wallets.CalcNotes(categoryView.Category.ID, true, false);
                 App.Wallets.BalanceSync();
             }
@@ -74,12 +68,13 @@ namespace FinManager.ViewModel
             {
                 if (categoryView.Category.ID == 1)
                 {
-                    OnNotify("You can't delete this category!");
+                    App.OnNotify("You can't delete this category!");
                     return;
                 }
                 Categories.Remove(categoryView);
                 App.Notes.AdjustNotes(categoryView.Category.ID);
                 App.Categories.DeleteCategory(categoryView.Category.ID);
+                App.SyncCategories();
                 OnPropertyChanged("Categories");
             }
         }
@@ -98,7 +93,7 @@ namespace FinManager.ViewModel
                 {
                     if (value.Category.ID == 1)
                     {
-                        OnNotify("You can't change this category!");
+                        App.OnNotify("You can't edit this category!");
                         selectedCategory = null;
                         OnPropertyChanged("SelectedCateg");
                         return;
@@ -114,8 +109,7 @@ namespace FinManager.ViewModel
         private void GetItems()
         {
             Categories.Clear();
-            var table = new ObservableCollection<Category>(App.Categories.GetCategories());
-            foreach (var i in table)
+            foreach (var i in App.CategoriesList)
             {
                 Categories.Add(new CategoryViewModel(i));
             }

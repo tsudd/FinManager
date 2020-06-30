@@ -6,6 +6,8 @@ using FinManager.Data;
 using System.IO;
 using System.Reflection;
 using FinManager.Model;
+using System.Collections.Generic;
+using Android.Content;
 
 namespace FinManager
 {
@@ -17,7 +19,11 @@ namespace FinManager
         public static NoteRep notes;
         public static WalletRep wallets;
         public static CategRep categories;
+        public static List<Wallet> WalletsList { get; private set; } 
+        public static List<Category> CategoriesList { get; private set; }
         public static string theme;
+        public delegate void Notification(string msg);
+        public static event Notification UserNotify;
 
         public static NoteRep Notes
         {
@@ -38,7 +44,8 @@ namespace FinManager
         {
             get
             {
-                string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DATABASE_WALLETS);
+                string dbPath = Path.Combine(Environment
+                    .GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DATABASE_WALLETS);
                 if (wallets == null)
                 {
                     Wallet wal = null;
@@ -62,7 +69,8 @@ namespace FinManager
         {
             get
             {
-                string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DATABASE_CATEGORIES);
+                string dbPath = Path.Combine(Environment
+                    .GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DATABASE_CATEGORIES);
                 if (categories == null)
                 {
                     Category cat = null;
@@ -82,13 +90,30 @@ namespace FinManager
             }
         }
 
+        public static void OnNotify(string msg)
+        {
+            UserNotify?.Invoke(msg);
+        }
+
 
         public App()
         {
             InitializeComponent();
+            SyncWallets();
+            SyncCategories();
             theme = ((Color)themee["backColor"]).ToHex();
             MainPage = new NavigationPage(new MainPage());
             ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = ((Color)themee["menuColor"]);
+        }
+
+        public static void SyncWallets()
+        {
+            WalletsList = Wallets.GetWallets();
+        }
+
+        public static void SyncCategories()
+        {
+            CategoriesList = Categories.GetCategories();
         }
 
         protected override void OnStart()
