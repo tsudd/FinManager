@@ -8,48 +8,56 @@
     <ContentPage.Content>
         <StackLayout BackgroundColor="{StaticResource Key=backColor}">
             <Label x:Name="bal" TextColor="{StaticResource Key=headerColor}"
-                       FontSize="Large"
-                       VerticalTextAlignment="Start"
-                       HorizontalTextAlignment="Center">
+                       Style="{StaticResource headerStyle}"
+                           VerticalTextAlignment="Start"
+                           HorizontalTextAlignment="Start"
+                       Padding="1"
+                       Margin="5">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="Balance: " />
-                        <Span Text="{Binding Balance}" TextColor="Green"/>
+                        <Span Text="B" TextColor="{StaticResource Key=menuColor}"/>
+                        <Span Text="alance: " />
+                        <Span Text="{Binding Balance}" TextColor="{StaticResource Key=myGreen}"/>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
+            <AbsoluteLayout>
             <ListView x:Name="notesList" ItemsSource="{Binding NoteGroups}" 
-                          SelectedItem="{Binding SelectedNote, Mode=TwoWay}" HasUnevenRows="True"
-                          IsGroupingEnabled="True"
-                          CachingStrategy="RecycleElement"
-                      IsPullToRefreshEnabled="True"
-                      Refreshing="OnRefresh"
-                      >
+                              SelectedItem="{Binding SelectedNote, Mode=TwoWay}" HasUnevenRows="True"
+                              IsGroupingEnabled="True"
+                      AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
+                          HorizontalOptions="FillAndExpand"
+                              CachingStrategy="RecycleElement"
+                          IsPullToRefreshEnabled="True"
+                          Refreshing="OnRefresh"
+                          >
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
-                        <ViewCell Height="25">
-                            <Label Text="{Binding Name}" FontSize="Caption" 
-                                   TextColor="{StaticResource Key=headerColor}" 
-                                   Padding="4"/>
+                        <ViewCell>
+                            <Label Text="{Binding Name}"
+                                       Style="{StaticResource pStyle}"
+                                       TextColor="{StaticResource Key=headerColor}" 
+                                       Padding="4"/>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.GroupHeaderTemplate>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell Height="40">
+                        <ViewCell Height="55">
                             <ViewCell.ContextActions>
                                 <MenuItem Clicked="OnDelete"
-                                          CommandParameter="{Binding .}"
-                                          IsDestructive="True"
-                                          Text="Delete" />
+                                              CommandParameter="{Binding .}"
+                                              IsDestructive="True"
+                                              Text="Delete" />
                             </ViewCell.ContextActions>
                             <StackLayout Orientation="Horizontal">
                                 <Label HorizontalOptions="StartAndExpand" 
-                                                VerticalTextAlignment="Center"
-                                                TextColor="{StaticResource Key=textColor}"
-                                           Padding="5"
-                                           Grid.Row="0"
-                                           Grid.Column="0">
+                                                    VerticalTextAlignment="Center"
+                                           Style="{StaticResource regStyle}"
+                                                    TextColor="{StaticResource Key=textColor}"
+                                               Padding="5"
+                                               Grid.Row="0"
+                                               Grid.Column="0">
                                     <Label.FormattedText>
                                         <FormattedString>
                                             <Span Text="{Binding Category}"/>
@@ -59,26 +67,24 @@
                                     </Label.FormattedText>
                                 </Label>
                                 <Label Text="{Binding WalName}" TextColor="{StaticResource subTextColor}"
-                                               FontSize="Body"
-                                        WidthRequest="50"
-                                               VerticalOptions="Center" HorizontalOptions="Center"/>
-                                <BoxView Color="{Binding Color}" WidthRequest="80"
-                                                 VerticalOptions="End" HorizontalOptions="End"/>
+                                                   FontSize="Body"
+                                           Style="{StaticResource subStyle}"
+                                            WidthRequest="50"
+                                                   VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <BoxView Color="{Binding Color}" WidthRequest="80" HeightRequest="55"
+                                                     VerticalOptions="End" HorizontalOptions="End"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-
             </ListView>
-            <StackLayout>
-                <Button Text="+" TextColor="{StaticResource Key=textColor}" 
-                        BackgroundColor="{StaticResource Key=menuColor}"
-                            Command="{Binding CreateNoteCommand}" 
-                        FontSize="Medium"
-                            HorizontalOptions="End"
-                        VerticalOptions="End"/>
-            </StackLayout>
+            <Button Text="+" TextColor="{StaticResource Key=backColor}" 
+                            BackgroundColor="{StaticResource Key=menuColor}"
+                                Command="{Binding CreateNoteCommand}" 
+                            Style="{StaticResource buttonStyle}"
+                            AbsoluteLayout.LayoutFlags="PositionProportional"  
+                            AbsoluteLayout.LayoutBounds=".90,.95,80,80"/>
+            </AbsoluteLayout>
         </StackLayout>
-
     </ContentPage.Content>
 </ContentPage>

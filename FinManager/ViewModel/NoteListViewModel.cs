@@ -15,7 +15,7 @@ namespace FinManager.ViewModel
 {
     public class NoteListViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<NoteViewModel> List { get; set; }
+        public List<NoteViewModel> DataList { get; set; }
         public ObservableCollection<Grouping<string, NoteViewModel>> NoteGroups { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -30,7 +30,7 @@ namespace FinManager.ViewModel
 
         public NoteListViewModel()
         {
-            List = new ObservableCollection<NoteViewModel>();
+            DataList = new List<NoteViewModel>();
             SyncInfo();
             App.Wallets.BalanceSync();
             CreateNoteCommand = new Command(CreateNote);
@@ -40,16 +40,15 @@ namespace FinManager.ViewModel
 
         public void MakeGrouping()
         {
-            if (List.Count == 0)
+            if (DataList.Count == 0)
             {
-                NoteGroups?.Clear();
+                NoteGroups.Clear();
                 return;
             }    
-            var group = List.GroupBy(p => p.Date)
+            var group = DataList.GroupBy(p => p.Date)
                 .Select(g => new Grouping<string, NoteViewModel>(g.Key, g));
             NoteGroups = new ObservableCollection<Grouping<string, NoteViewModel>>(group);
             OnPropertyChanged("NoteGroups");
-
         }
 
         public NoteViewModel SelectedNote
@@ -104,12 +103,12 @@ namespace FinManager.ViewModel
                 }
                 if (note.Expense.ID == 0)
                 {
-                    List.Add(note);
+                    DataList.Insert(0, note);
                 }
                 App.Notes.SaveNote(note.Expense);
                 SyncInfo();
+                App.SyncWallets();
                 OnPropertyChanged("NotesGroups");
-                OnPropertyChanged("List");
                 OnPropertyChanged("Balance");
             }
             Back();
@@ -119,7 +118,7 @@ namespace FinManager.ViewModel
         {
             if (note != null)
             {
-                List.Remove(note);
+                DataList.Remove(note);
                 App.Notes.DeleteNote(note.Expense);
                 MakeGrouping();
                 OnPropertyChanged("Balance");
@@ -133,17 +132,16 @@ namespace FinManager.ViewModel
 
         public void SyncInfo()
         {
-            List.Clear();
+            DataList.Clear();
             Wallets = App.Wallets.GetWallets();
             Categories = App.Categories.GetCategories();
             var table = new ObservableCollection<Note>(App.Notes.GetNotes());
-            foreach (var i in table)
+            for (int i = table.Count - 1; i >= 0; i--)
             {
-                List.Add(new NoteViewModel(i));
+                DataList.Add(new NoteViewModel(table[i]));
             }
             MakeGrouping();
             OnPropertyChanged("Balance");
-            OnPropertyChanged("List");
         }
     }
 }

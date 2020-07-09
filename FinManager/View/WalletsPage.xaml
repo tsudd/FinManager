@@ -6,31 +6,32 @@
              mc:Ignorable="d"
              x:Class="FinManager.View.WalletsPage" Title="Wallets list">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="{StaticResource Key=backColor}">
+        <AbsoluteLayout BackgroundColor="{StaticResource Key=backColor}">
             <ListView x:Name="notesList" ItemsSource="{Binding Wallets}" 
                       HasUnevenRows="True"
                       CachingStrategy="RecycleElement"
+                      AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
                       SelectedItem="{Binding SelectedWallet, Mode=TwoWay}"
                       >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell Height="100">
                             <Label Text="{Binding WalName}"
+                                   Style="{StaticResource headerStyle}"
                                   TextColor="{StaticResource Key=textColor}"
-                                   FontSize="Medium"
-                                   Padding="5"/>
+                                   FontSize="28"
+                                   VerticalOptions="Center"
+                                   Padding="20"/>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <StackLayout>
-                <Button Text="+" TextColor="{StaticResource Key=textColor}" 
+            <Button Text="+" TextColor="{StaticResource Key=backColor}" 
                             Command="{Binding AddWalletCommand}" 
-                            HorizontalOptions="End"
-                        VerticalOptions="End"
-                        BackgroundColor="{StaticResource Key=menuColor}"
-                        FontSize="Medium"/>
-            </StackLayout>
-        </StackLayout>
+                        Style="{StaticResource buttonStyle}"
+                        AbsoluteLayout.LayoutFlags="PositionProportional"  
+                        AbsoluteLayout.LayoutBounds=".90,.95,80,80"
+                        BackgroundColor="{StaticResource Key=menuColor}"/>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

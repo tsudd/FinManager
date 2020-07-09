@@ -11,6 +11,8 @@
                 <Setter Property="BackgroundColor" Value="{StaticResource Key=buttonColor}"/>
                 <Setter Property="TextColor" Value="{StaticResource Key=textColor}" />
                 <Setter Property="BorderRadius" Value="0"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="28"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -27,24 +29,20 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Button Text="Manage categories" 
-                        FontSize="Medium" 
                         Grid.Row="2" 
                         Grid.Column="0" 
                         Style="{StaticResource plainButton}"
                         Command="{Binding ManageCategoriesCommand}"/>
                 <Button Text="Manage wallets" 
-                        FontSize="Medium" 
                         Grid.Row="3" 
                         Grid.Column="0" 
                         Style="{StaticResource plainButton}"
                         Command="{Binding ManageWalletsCommand}"/>
                 <Button Text="Language" 
-                        FontSize="Medium" 
                         Grid.Row="1" 
                         Grid.Column="0" 
                         Style="{StaticResource plainButton}"/>
-                <Button Text="Theme" 
-                        FontSize="Medium" 
+                <Button Text="Theme"  
                         Grid.Row="0" 
                         Grid.Column="0" 
                         Style="{StaticResource plainButton}"/>

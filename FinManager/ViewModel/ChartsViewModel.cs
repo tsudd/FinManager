@@ -37,17 +37,6 @@ namespace FinManager.ViewModel
             catSums = new SortedDictionary<int, double>();
             catSyn = new SortedDictionary<int, bool>();
             WalletsSums = new List<Entry>();
-            ExpChart = new BarChart()
-            {
-                LabelTextSize = 40f,
-                BackgroundColor = SKColor.Parse(App.theme),
-
-            };
-            RadChart = new RadialGaugeChart()
-            {
-                LabelTextSize = 40f,
-                BackgroundColor = SKColor.Parse(App.theme),
-            };
             Entries = new List<Entry>();
             FillLists();
         }
@@ -129,10 +118,7 @@ namespace FinManager.ViewModel
                 ValueLabel = ((float)Balance).ToString(),
                 Color = SKColor.Parse(HexConverter())
             });
-            ExpChart.Entries = Entries;
-            RadChart.Entries = WalletsSums;
-            OnPropertyChanged("ExpChart");
-            OnPropertyChanged("RadChart");
+            InitCharts();
         }
 
         public void UpdateCharts()
@@ -140,8 +126,30 @@ namespace FinManager.ViewModel
             FillLists();
             OnPropertyChanged("AllIncome");
             OnPropertyChanged("AllExpenses");
-            OnPropertyChanged("Months");
             OnPropertyChanged("Balance");
+        }
+
+        private void InitCharts()
+        {
+            ExpChart = new BarChart()
+            {
+                LabelTextSize = 40f,
+                BackgroundColor = SKColor.Parse(((Color)App.theme["backColor"]).ToHex()),
+                Entries = Entries
+            };
+            RadChart = new RadialGaugeChart()
+            {
+                LabelTextSize = 40f,
+                BackgroundColor = SKColor.Parse(((Color)App.theme["backColor"]).ToHex()),
+                Entries = WalletsSums
+            };
+            OnPropertyChanged("ExpChart");
+            OnPropertyChanged("RadChart");
+        }
+
+        public void UpdateMonths()
+        {
+            OnPropertyChanged("Month");
         }
 
         protected void OnPropertyChanged(string propName)
@@ -152,7 +160,7 @@ namespace FinManager.ViewModel
         private static string HexConverter()
         { 
             var rand = new Random();
-            return "#" + rand.Next(0, 255).ToString("X2") + rand.Next(0, 255).ToString("X2") + rand.Next(0, 255).ToString("X2");
+            return "#" + "00" + "64" + rand.Next(0, 255).ToString("X2");
         }
     }
 }

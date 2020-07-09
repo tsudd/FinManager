@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Xml.Schema;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace FinManager.ViewModel
 {
@@ -153,7 +154,7 @@ namespace FinManager.ViewModel
 
         public string ExpIn
         {
-            get { return App.Categories.GetCategory(Expense.CatId).InCome?"Green":"Red";}
+            get { return App.Categories.GetCategory(Expense.CatId).InCome ? ((Color)App.theme["myGreen"]).ToHex() : ((Color)App.theme["myRed"]).ToHex();}
         }
     }
 }

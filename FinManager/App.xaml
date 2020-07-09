@@ -7,12 +7,37 @@
              x:Class="FinManager.App">
     <Application.Resources>
         <ResourceDictionary x:Name="themee">
+            <Style x:Key="headerStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="28" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="pStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="Padding" Value="10"/>
+            </Style>
+            <Style x:Key="regStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="18"/>
+            </Style>
+            <Style x:Key="subStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="19"/>
+                <Setter Property="FontAttributes" Value="Italic"/>
+            </Style>
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="Padding" Value="1"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
             <Color x:Key="textColor">#000000</Color>
-            <Color x:Key="backColor">#C0C0C0</Color>
-            <Color x:Key="menuColor">#FF8C00</Color>
-            <Color x:Key="subTextColor">#FF8C00</Color>
-            <Color x:Key="buttonColor">#C0C0C0</Color>
+            <Color x:Key="backColor">#ffffff</Color>
+            <Color x:Key="menuColor">#008b8b</Color>
+            <Color x:Key="subTextColor">#000000</Color>
+            <Color x:Key="buttonColor">#ffffff</Color>
             <Color x:Key="headerColor">#000000</Color>
+            <Color x:Key="navigationColor">#008b8b</Color>
+            <Color x:Key="myGreen">#40bf40</Color>
+            <Color x:Key="myRed">#ff6347</Color>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

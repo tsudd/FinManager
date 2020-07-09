@@ -21,7 +21,7 @@ namespace FinManager
         public static CategRep categories;
         public static List<Wallet> WalletsList { get; private set; } 
         public static List<Category> CategoriesList { get; private set; }
-        public static string theme;
+        public static ResourceDictionary theme;
         public delegate void Notification(string msg);
         public static event Notification UserNotify;
 
@@ -101,7 +101,7 @@ namespace FinManager
             InitializeComponent();
             SyncWallets();
             SyncCategories();
-            theme = ((Color)themee["backColor"]).ToHex();
+            theme = themee;
             MainPage = new NavigationPage(new MainPage());
             ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = ((Color)themee["menuColor"]);
         }

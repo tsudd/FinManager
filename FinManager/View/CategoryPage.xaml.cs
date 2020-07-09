@@ -33,7 +33,7 @@ namespace FinManager.View
         {
             if (last != null)
             {
-                last.BorderColor = Color.FromHex(App.theme);
+                last.BorderColor = (Color)App.theme["backColor"];
             }
             last = (Button)sender;
             last.BorderColor = Color.FromHex("#1E90FF");

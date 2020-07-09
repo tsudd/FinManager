@@ -24,7 +24,9 @@ namespace FinManager.View
 
         protected override void OnAppearing()
         {
+            notesList.IsRefreshing = true;
             noteList.SyncInfo();
+            notesList.IsRefreshing = false;
             base.OnAppearing();
         }
 

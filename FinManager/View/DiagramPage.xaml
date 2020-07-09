@@ -7,18 +7,19 @@
              mc:Ignorable="d"
              x:Class="FinManager.View.DiagramPage" Title="Charts">
     <StackLayout BackgroundColor="{StaticResource Key=backColor}">
-        <Picker FontSize="Medium" ItemsSource="{Binding Months}"
+        <Picker FontSize="20" ItemsSource="{Binding Months}"
                              x:Name="picker" SelectedIndexChanged="SelectedMounth"
                 HorizontalOptions="CenterAndExpand"
+                FontAttributes="Bold"
                 TextColor="{StaticResource Key=textColor}"
                 WidthRequest="150"
                 />
-        <RefreshView Refreshing="OnRefresh">
-            <ScrollView >
+        <RefreshView x:Name="scroll" Refreshing="OnRefresh">
+            <ScrollView>
                 <StackLayout>
                     <Label HorizontalOptions="StartAndExpand"   
                                 TextColor="{StaticResource Key=headerColor}"
-                               FontSize="Medium"
+                           Style="{StaticResource pStyle}"
                                 Padding="5">
                         <Label.FormattedText>
                             <FormattedString>
@@ -30,7 +31,7 @@
                     </Label>
                     <Label HorizontalOptions="StartAndExpand" 
                                 TextColor="{StaticResource Key=headerColor}"
-                               FontSize="Medium"
+                                Style="{StaticResource pStyle}"
                                 Padding="5">
                         <Label.FormattedText>
                             <FormattedString>
@@ -44,11 +45,12 @@
                                      BackgroundColor="{StaticResource Key=backColor}"/>
                     <Label VerticalOptions="Center"
                                 TextColor="{StaticResource Key=headerColor}"
-                               FontSize="Medium"
+                                Style="{StaticResource pStyle}"
                                 Padding="5"
                            Text="Wallets info">
                     </Label>
                     <forms:ChartView HeightRequest="300" Chart="{Binding RadChart}" 
+                                     
                                      />
                 </StackLayout>
             </ScrollView>

@@ -9,7 +9,8 @@
         <StackLayout BackgroundColor="{StaticResource Key=backColor}">
             <StackLayout>
                 <Label Text="Enter a name" TextColor="{StaticResource Key=textColor}" 
-                       FontSize="Medium" HorizontalTextAlignment="Start" Padding="5" />
+                       HorizontalTextAlignment="Start" Padding="5"
+                       Style="{StaticResource pStyle}"/>
                 <Entry Text="{Binding Name}" TextColor="{StaticResource Key=subTextColor}" Keyboard="Default"
                        PlaceholderColor="{StaticResource Key=textColor}" MaxLength="25"
                        />
@@ -24,7 +25,7 @@
                         <ColumnDefinition Width="50" />
                     </Grid.ColumnDefinitions>
                     <Label Text="Expense/income" TextColor="{StaticResource Key=textColor}" 
-                           FontSize="Medium" 
+                           Style="{StaticResource pStyle}"
                            VerticalOptions="CenterAndExpand"
                            Grid.Row="0"
                            Grid.Column="0" />
@@ -37,7 +38,7 @@
                 </Grid>
             </StackLayout>
             <StackLayout>
-                <Label Text="Choose a color" TextColor="{StaticResource Key=textColor}" FontSize="Medium"/>
+                <Label Text="Choose a color" TextColor="{StaticResource Key=textColor}" Style="{StaticResource pStyle}" Padding="10"/>
                 <Grid RowSpacing="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="45" />
@@ -115,10 +116,12 @@
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="End">
                 <Button Text="Back" Command="{Binding Path=LstViewModel.BackCommand}"
-                        TextColor="{StaticResource Key=textColor}"
+                        TextColor="{StaticResource Key=backColor}"
+                        Style="{StaticResource buttonStyle}"
                         BackgroundColor="{StaticResource Key=menuColor}"/>
                 <Button Text="Done" Command="{Binding LstViewModel.SaveCategoryCommand }"
-                        TextColor="{StaticResource Key=textColor}"
+                        TextColor="{StaticResource Key=backColor}"
+                        Style="{StaticResource buttonStyle}"
                         CommandParameter="{Binding}" 
                         BackgroundColor="{StaticResource Key=menuColor}"/>
             </StackLayout>

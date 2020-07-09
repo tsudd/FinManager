@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Entry = Microcharts.Entry;
 
 
 namespace FinManager.View
@@ -34,29 +33,27 @@ namespace FinManager.View
             { 
                 return;
             }
+            scroll.IsRefreshing = true;
             selected = picker.SelectedItem;
             ChartsView.PickedDate((string)selected ?? "");
+            ChartsView.UpdateCharts();
+            scroll.IsRefreshing = false;
         }
 
         protected override void OnAppearing()
         {
+            scroll.IsRefreshing = true;
             ChartsView.UpdateCharts();
             picker.SelectedItem = selected;
+            scroll.IsRefreshing = false;
             base.OnAppearing();
         }
 
         public void OnRefresh(object sender, EventArgs e)
         {
+            ChartsView.UpdateMonths();
             var list = (RefreshView)sender;
-            ChartsView.UpdateCharts();
             list.IsRefreshing = false;
-            picker.SelectedItem = selected;
-            if (selected == null)
-            {
-                picker.SelectedItem = ChartsView.Months.Count != 0 ? ChartsView.Months[0] : null;
-                selected = picker.SelectedItem;
-            }
-            
         }
     }
 }

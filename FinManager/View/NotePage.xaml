@@ -17,7 +17,7 @@
                 </Grid.ColumnDefinitions>
                 <Label Text="Date - " 
                        TextColor="{StaticResource Key=headerColor}" 
-                       FontSize="Medium"
+                       Style="{StaticResource pStyle}"
                        VerticalOptions="Center" 
                        HorizontalOptions="Center"
                        Grid.Column="0"
@@ -27,12 +27,20 @@
                             Grid.Column="1" Grid.Row="0" 
                             HorizontalOptions="Center"
                             VerticalOptions="Center"
+                            FontSize="20"
+                            FontAttributes="Bold"
                             TextColor="{StaticResource Key=textColor}"
                             MaximumDate="{Binding DateTime}">
                     <DatePicker.MinimumDate>1/01/2020</DatePicker.MinimumDate>
                 </DatePicker>
             </Grid>
-            <Label Text="Choose a wallet" TextColor="{StaticResource Key=headerColor}" FontSize="Medium" />
+            <StackLayout>
+                <Label x:Name ="lbl" Text="Amount" Style="{StaticResource pStyle}" TextColor="{StaticResource Key=headerColor}"/>
+                <Entry Text="{Binding Amount}" FontSize="28" Keyboard="Numeric"
+                       TextColor="{StaticResource Key=subTextColor}"
+                       PlaceholderColor="{StaticResource Key=textColor}"/>
+            </StackLayout>
+            <Label Text="Choose a wallet" TextColor="{StaticResource Key=headerColor}" Style="{StaticResource pStyle}"/>
             <RelativeLayout HeightRequest="90">
                 <ListView CachingStrategy="RecycleElement"
                               x:Name="wlts"
@@ -49,9 +57,10 @@
                             <ViewCell>
                                 <ContentView Rotation="90">
                                     <Label Text="{Binding WalName}" 
+                                           Style="{StaticResource regStyle}"
+                                           FontAttributes="Bold"
                                                HorizontalOptions="Center" 
                                                VerticalOptions="Center" 
-                                               FontSize="Medium" 
                                                TextColor="{StaticResource Key=textColor}"/>
                                 </ContentView>
                             </ViewCell>
@@ -59,8 +68,8 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </RelativeLayout>
-            <Label Text="Choose a category" TextColor="{StaticResource Key=headerColor}" FontSize="Medium" />
-            <RelativeLayout>
+            <Label Text="Choose a category" TextColor="{StaticResource Key=headerColor}" Style="{StaticResource pStyle}"/>
+            <RelativeLayout HeightRequest="100">
                 <ListView CachingStrategy="RecycleElement"
                               SelectedItem="{Binding SelectedCategory}"
                               ItemsSource="{Binding ListViewModel.Categories}"
@@ -80,6 +89,8 @@
                                                      AbsoluteLayout.LayoutFlags="PositionProportional"/>
                                         </AbsoluteLayout>
                                         <Label Text="{Binding Name}"
+                                               Style="{StaticResource regStyle}"
+                                               FontAttributes="Bold"
                                                     TextColor="{StaticResource Key=textColor}"
                                                     HorizontalOptions="CenterAndExpand"
                                                     VerticalOptions="CenterAndExpand"
@@ -91,17 +102,14 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </RelativeLayout>
-            <StackLayout>
-                <Label x:Name ="lbl" Text="Amount" FontSize="Medium" TextColor="{StaticResource Key=headerColor}"/>
-                <Entry Text="{Binding Amount}" FontSize="Medium" Keyboard="Numeric" 
-                       TextColor="{StaticResource Key=subTextColor}"
-                       PlaceholderColor="{StaticResource Key=textColor}"/>
-            </StackLayout>
+            
             <StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="End">
-                <Button Text="Back" Command="{Binding Path=ListViewModel.BackCommand}" TextColor="{StaticResource Key=textColor}"
-                        BackgroundColor="{StaticResource Key=menuColor}"/>
+                <Button Text="Back" Command="{Binding Path=ListViewModel.BackCommand}" TextColor="{StaticResource Key=backColor}"
+                        BackgroundColor="{StaticResource Key=menuColor}"
+                        Style="{StaticResource buttonStyle}"/>
                 <Button Text="Done" Command="{Binding ListViewModel.SaveNoteCommand}" 
-                        TextColor="{StaticResource Key=textColor}"
+                        TextColor="{StaticResource Key=backColor}"
+                        Style="{StaticResource buttonStyle}"
                         BackgroundColor="{StaticResource Key=menuColor}"
                         CommandParameter="{Binding}" />
             </StackLayout>

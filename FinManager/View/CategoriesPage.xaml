@@ -6,10 +6,11 @@
              mc:Ignorable="d"
              x:Class="FinManager.View.CategoriesPage" Title="Manage Categories">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="{StaticResource Key=backColor}">
+        <AbsoluteLayout BackgroundColor="{StaticResource Key=backColor}">
             <ListView x:Name="notesList" ItemsSource="{Binding Categories}" 
                       HasUnevenRows="True"
                       CachingStrategy="RecycleElement"
+                      AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
                       SelectedItem="{Binding SelectedCateg, Mode=TwoWay}"
                       >
                 <ListView.ItemTemplate>
@@ -32,7 +33,7 @@
                                 <Label Text="{Binding Name}"
                                        VerticalOptions="CenterAndExpand"
                                        HorizontalOptions="CenterAndExpand"
-                                       FontSize="Default"
+                                       Style="{StaticResource regStyle}"
                                        TextColor="{StaticResource Key=textColor}"
                                        Grid.Column="0"
                                        Grid.Row="0" />
@@ -45,14 +46,12 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <StackLayout>
-                <Button Text="+" TextColor="{StaticResource Key=textColor}" 
+            <Button Text="+" TextColor="{StaticResource Key=backColor}" 
                             Command="{Binding AddCategoryCommand}" 
-                            HorizontalOptions="End"
-                        VerticalOptions="End"
                         BackgroundColor="{StaticResource Key=menuColor}"
-                        FontSize="Medium"/>
-            </StackLayout>
-        </StackLayout>
+                        Style="{StaticResource buttonStyle}"
+                        AbsoluteLayout.LayoutFlags="PositionProportional"  
+                            AbsoluteLayout.LayoutBounds=".90,.95,80,80"/>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
