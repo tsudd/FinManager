@@ -16,6 +16,12 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell Height="100">
+                            <ViewCell.ContextActions>
+                                <MenuItem Clicked="OnDelete"
+                                          CommandParameter="{Binding .}"
+                                          IsDestructive="True"
+                                          Text="Delete" />
+                            </ViewCell.ContextActions>
                             <Label Text="{Binding WalName}"
                                    Style="{StaticResource headerStyle}"
                                   TextColor="{StaticResource Key=textColor}"
@@ -26,12 +32,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="+" TextColor="{StaticResource Key=backColor}" 
+            <ImageButton Source="addButton.png" 
                             Command="{Binding AddWalletCommand}" 
-                        Style="{StaticResource buttonStyle}"
                         AbsoluteLayout.LayoutFlags="PositionProportional"  
-                        AbsoluteLayout.LayoutBounds=".90,.95,80,80"
-                        BackgroundColor="{StaticResource Key=menuColor}"/>
+                        AbsoluteLayout.LayoutBounds=".90,.95,80,80"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -90,7 +90,6 @@ namespace FinManager.Data
             get { return balance; }
             set { balance = value; }
         }
-
     }
 
 }

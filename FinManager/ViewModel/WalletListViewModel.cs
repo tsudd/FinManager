@@ -40,9 +40,13 @@ namespace FinManager.ViewModel
 
         private void SaveWallet(object catObj)
         {
-            WalletViewModel walletView = catObj as WalletViewModel;
-            if (walletView != null && walletView.IsValid)
+            if (catObj is WalletViewModel walletView && walletView.IsValid)
             {
+                if (CheckIdent(walletView.WalName))
+                {
+                    App.OnNotify("Same wallet already exists! Can't make another.");
+                    return;
+                }
                 if (walletView.Wallet.ID == 0)
                 {
                     Wallets.Add(walletView);
@@ -69,10 +73,10 @@ namespace FinManager.ViewModel
                     return;
                 }
                 Wallets.Remove(walletView);
-                App.Notes.AdjustNotes(walletView.Wallet.ID);
+                App.Notes.AdjustNotesByWal(walletView.Wallet.ID);
                 App.Wallets.DeleteWallet(walletView.Wallet.ID);
                 App.SyncWallets();
-                OnPropertyChanged("Categories");
+                OnPropertyChanged("Wallets");
             }
         }
 
@@ -103,6 +107,18 @@ namespace FinManager.ViewModel
             {
                 Wallets.Add(new WalletViewModel(i));
             }
+        }
+
+        private static bool CheckIdent(string name)
+        {
+            foreach (var i in App.WalletsList)
+            {
+                if (i.WalName == name)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

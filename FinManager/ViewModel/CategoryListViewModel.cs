@@ -40,9 +40,13 @@ namespace FinManager.ViewModel
 
         private void SaveCategory(object catObj)
         {
-            CategoryViewModel categoryView = catObj as CategoryViewModel;
-            if (categoryView != null && categoryView.IsValid)
+            if (catObj is CategoryViewModel categoryView && categoryView.IsValid)
             {
+                if (CheckIdent(categoryView.Name))
+                {
+                    App.OnNotify("Same category already exists! Can't make another.");
+                    return;
+                }
                 if (categoryView.Category.ID == 0)
                 {
                     Categories.Add(categoryView);
@@ -72,7 +76,7 @@ namespace FinManager.ViewModel
                     return;
                 }
                 Categories.Remove(categoryView);
-                App.Notes.AdjustNotes(categoryView.Category.ID);
+                App.Notes.AdjustNotesByCat(categoryView.Category.ID);
                 App.Categories.DeleteCategory(categoryView.Category.ID);
                 App.SyncCategories();
                 OnPropertyChanged("Categories");
@@ -113,6 +117,18 @@ namespace FinManager.ViewModel
             {
                 Categories.Add(new CategoryViewModel(i));
             }
+        }
+
+        private static bool CheckIdent(string name)
+        {
+            foreach (var i in App.CategoriesList)
+            {
+                if (i.Name == name)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

@@ -20,6 +20,8 @@ namespace FinManager.ViewModel
         private SortedDictionary<int, double> catSums;
         private SortedDictionary<int, bool> catSyn;
         private SortedDictionary<string, DateTime> months;
+        private readonly string basicColor;
+        private int lastColor;
         public event PropertyChangedEventHandler PropertyChanged;
         public Chart ExpChart { get; private set; }
         public Chart RadChart { get; private set; }
@@ -38,6 +40,9 @@ namespace FinManager.ViewModel
             catSyn = new SortedDictionary<int, bool>();
             WalletsSums = new List<Entry>();
             Entries = new List<Entry>();
+            basicColor = "0064";
+            var rand = new Random();
+            lastColor = rand.Next(0, 255);
             FillLists();
         }
 
@@ -157,10 +162,11 @@ namespace FinManager.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
-        private static string HexConverter()
-        { 
-            var rand = new Random();
-            return "#" + "00" + "64" + rand.Next(0, 255).ToString("X2");
+        private string HexConverter()
+        {
+            lastColor += 35;
+            if (lastColor > 255) lastColor -= 255;
+            return "#00" + lastColor.ToString("X2") + "64";
         }
     }
 }

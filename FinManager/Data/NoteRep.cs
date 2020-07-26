@@ -51,13 +51,23 @@ namespace FinManager.Data
             }
         }
 
-        public  void AdjustNotes(int id)
+        public void AdjustNotesByCat(int id)
         {
             var notes = database.Table<Note>().Where(x => x.CatId == id).ToList();
             foreach(var i in notes)
             {
                 i.CatId = 1;
                 SaveNote(i); 
+            }
+        }
+
+        public void AdjustNotesByWal(int id)
+        {
+            var notes = database.Table<Note>().Where(x => x.WalId == id).ToList();
+            foreach (var i in notes)
+            {
+                i.WalId = 1;
+                SaveNote(i);
             }
         }
 

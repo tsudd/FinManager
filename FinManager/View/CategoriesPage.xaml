@@ -46,10 +46,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="+" TextColor="{StaticResource Key=backColor}" 
-                            Command="{Binding AddCategoryCommand}" 
-                        BackgroundColor="{StaticResource Key=menuColor}"
-                        Style="{StaticResource buttonStyle}"
+            <ImageButton Source="addButton.png"  
+                            Command="{Binding AddCategoryCommand}"
                         AbsoluteLayout.LayoutFlags="PositionProportional"  
                             AbsoluteLayout.LayoutBounds=".90,.95,80,80"/>
         </AbsoluteLayout>
