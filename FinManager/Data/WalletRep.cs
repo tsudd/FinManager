@@ -37,12 +37,39 @@ namespace FinManager.Data
         {
             var wal = GetWallet(note.WalId);
             var cat = App.Categories.GetCategory(note.CatId);
-            if (note.ID != 0 && noteChanged)
+            var old = App.Notes.GetNote(note.ID);
+            if (old == null)
             {
-                wal.Sum += Math.Pow(-1, cat.InCome?1.0:0) * note.Sum;
+                wal.Sum += (-1.0) * Math.Pow(-1, cat.InCome ? 1.0 : 0) * note.Sum;
+            } 
+            else
+            {
+                var oldCat = App.Categories.GetCategory(old.CatId);
+                if (oldCat.InCome && !cat.InCome)
+                {
+                    wal.Sum -= 2.0 * note.Sum;
+                }
+                else if (!oldCat.InCome && cat.InCome)
+                {
+                    wal.Sum += 2.0 * note.Sum;
+                }
             }
-            if (add)
-                wal.Sum += (-1) * Math.Pow(-1, cat.InCome ? 1.0 : 0) * note.Sum;
+            
+            //if (note.ID != 0 && noteChanged)
+            //{
+            //    wal.Sum += Math.Pow(-1, cat.InCome?1.0:0) * note.Sum;
+            //}
+            //if (add)
+            //    wal.Sum += (-1) * Math.Pow(-1, cat.InCome ? 1.0 : 0) * note.Sum;
+            SaveWallet(wal);
+            BalanceSync();
+        }
+
+        public void DeleteNote(Note note)
+        {
+            var wal = GetWallet(note.WalId);
+            var cat = App.Categories.GetCategory(note.CatId);
+            wal.Sum += Math.Pow(-1, cat.InCome ? 1.0 : 0) * note.Sum;
             SaveWallet(wal);
             BalanceSync();
         }

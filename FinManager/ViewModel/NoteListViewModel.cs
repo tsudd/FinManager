@@ -42,7 +42,7 @@ namespace FinManager.ViewModel
         {
             if (DataList.Count == 0)
             {
-                NoteGroups.Clear();
+                NoteGroups?.Clear();
                 return;
             }    
             var group = DataList.GroupBy(p => p.Date)

@@ -10,7 +10,7 @@ using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Color = Xamarin.Forms.Color;
-using Entry = Microcharts.Entry;
+using Entry = Microcharts.ChartEntry;
 
 namespace FinManager.ViewModel
 {

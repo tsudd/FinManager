@@ -34,7 +34,7 @@ namespace FinManager.Data
 
         public int DeleteNote(Note item)
         {
-            App.Wallets.ChangeSum(item, false);
+            App.Wallets.DeleteNote(item);
             return database.Delete(item);
         }
 
